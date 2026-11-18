@@ -33,7 +33,7 @@ export function ModuleTeaser() {
                 transition={{ duration: 0.4, delay: (i % 4) * 0.07 }}
               >
                 <Link
-                  href={`/features#${m.id}`}
+                  href={`/docs/${m.id}`}
                   className="group flex h-full flex-col rounded-xl border border-border/60 bg-card/60 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card"
                 >
                   <div className="mb-3 flex items-center justify-between">
@@ -54,7 +54,7 @@ export function ModuleTeaser() {
 
         <div className="mt-10 flex justify-center">
           <Link
-            href="/features"
+            href="/docs"
             className="inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-muted/40 px-4 py-2 text-sm font-medium text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
           >
             Browse all modules &amp; docs

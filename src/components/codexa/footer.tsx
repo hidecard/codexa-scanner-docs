@@ -17,7 +17,7 @@ const LINKS = [
   {
     title: 'Resources',
     items: [
-      { label: 'Documentation', href: '/features' },
+      { label: 'Documentation', href: '/docs' },
       { label: 'Releases', href: PROJECT.releases, external: true },
       { label: 'Repository', href: PROJECT.repo, external: true },
     ],
@@ -65,7 +65,7 @@ export function Footer() {
                 <Download className="h-4 w-4" />
               </a>
               <Link
-                href="/features"
+                href="/docs"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border/60 bg-muted/40 text-muted-foreground transition hover:border-primary/40 hover:text-primary"
                 aria-label="Documentation"
               >
@@ -116,7 +116,7 @@ export function Footer() {
               {MODULES.map((m) => (
                 <li key={m.id}>
                   <Link
-                    href={`/features#${m.id}`}
+                    href={`/docs/${m.id}`}
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {m.name}
