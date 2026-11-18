@@ -14,6 +14,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/changelog',
     '/guides',
+    '/playground',
+    '/glossary',
+    '/roadmap',
+    '/contributing',
   ]
 
   const entries: MetadataRoute.Sitemap = staticRoutes.map((path) => ({

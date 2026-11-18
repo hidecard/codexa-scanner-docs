@@ -16,6 +16,7 @@ import type { DictKey } from '@/lib/i18n/dictionary'
 const NAV_LINKS: { labelKey: DictKey; href: string }[] = [
   { labelKey: 'nav.features', href: '/features' },
   { labelKey: 'nav.docs', href: '/guides' },
+  { labelKey: 'nav.playground', href: '/playground' },
   { labelKey: 'nav.download', href: '/download' },
   { labelKey: 'nav.guide', href: '/guide' },
   { labelKey: 'nav.about', href: '/about' },

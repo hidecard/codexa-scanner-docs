@@ -43,6 +43,10 @@ const PAGES: SearchEntry[] = [
   { id: 'about', label: 'About', keywords: 'about app project developer', href: '/about', group: 'Pages', icon: ShieldAlert },
   { id: 'changelog', label: 'Changelog', keywords: 'changelog releases versions history updates', href: '/changelog', group: 'Pages', icon: History },
   { id: 'guides', label: 'Documentation', keywords: 'docs documentation guides manuals', href: '/guides', group: 'Pages', icon: BookOpen },
+  { id: 'playground', label: 'Playground', keywords: 'playground demo interactive scan web audit tls', href: '/playground', group: 'Pages', icon: Radar },
+  { id: 'glossary', label: 'Glossary', keywords: 'glossary terms definitions security networking csp tls rdap', href: '/glossary', group: 'Pages', icon: BookOpen },
+  { id: 'roadmap', label: 'Roadmap', keywords: 'roadmap future planned considering upcoming features', href: '/roadmap', group: 'Pages', icon: History },
+  { id: 'contributing', label: 'Contributing', keywords: 'contributing contribute open source build pr issues', href: '/contributing', group: 'Pages', icon: ShieldAlert },
 ]
 
 export function SearchPalette() {

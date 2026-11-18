@@ -26,6 +26,9 @@ const LINKS: FooterCol[] = [
     items: [
       { labelKey: 'common.documentation', href: '/guides' },
       { labelKey: 'footer.changelog', href: '/changelog' },
+      { labelKey: 'footer.glossary', href: '/glossary' },
+      { labelKey: 'footer.roadmap', href: '/roadmap' },
+      { labelKey: 'footer.contributing', href: '/contributing' },
       { labelKey: 'footer.releases', href: PROJECT.releases, external: true },
       { labelKey: 'footer.repository', href: PROJECT.repo, external: true },
     ],

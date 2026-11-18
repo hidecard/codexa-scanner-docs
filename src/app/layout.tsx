@@ -17,6 +17,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://github.com/hidecard/codexa-scanner"),
+  alternates: {
+    types: {
+      "application/rss+xml": "https://github.com/hidecard/codexa-scanner/feed.xml",
+    },
+  },
   title: "Codexa Scanner — Cross-Platform Network & Web Security Scanner",
   description:
     "Codexa Scanner is a cross-platform desktop app for network reconnaissance and HTTP security-header inspection. Built with Go, Wails, React and TypeScript. Available for Linux, Windows and macOS.",
