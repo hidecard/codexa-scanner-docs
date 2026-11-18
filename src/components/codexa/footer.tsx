@@ -19,6 +19,7 @@ const LINKS = [
     title: 'Resources',
     items: [
       { label: 'Documentation', href: '/guides' },
+      { label: 'Changelog', href: '/changelog' },
       { label: 'Releases', href: PROJECT.releases, external: true },
       { label: 'Repository', href: PROJECT.repo, external: true },
     ],

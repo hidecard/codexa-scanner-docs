@@ -29,14 +29,19 @@ export function DocsChrome({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* decorative search */}
-            <div className="hidden items-center gap-2 rounded-md border border-border/60 bg-muted/30 px-3 py-1.5 text-xs text-muted-foreground sm:flex">
+            {/* search trigger */}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event('open-search'))}
+              className="hidden items-center gap-2 rounded-md border border-border/60 bg-muted/30 px-3 py-1.5 text-xs text-muted-foreground transition hover:border-primary/40 hover:text-foreground sm:flex"
+              aria-label="Search documentation"
+            >
               <Search className="h-3.5 w-3.5" />
               <span>Search docs…</span>
               <kbd className="rounded border border-border/60 bg-background px-1 font-mono text-[10px]">
                 /
               </kbd>
-            </div>
+            </button>
 
             {/* mobile sidebar trigger */}
             <Sheet open={open} onOpenChange={setOpen}>
