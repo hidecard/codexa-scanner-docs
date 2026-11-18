@@ -12,10 +12,12 @@ import {
 } from 'lucide-react'
 import { MODULES } from '@/lib/codexa-data'
 import { TableOfContents } from './table-of-contents'
-import { useT } from '@/components/i18n/language-provider'
+import { useT, useLanguage } from '@/components/i18n/language-provider'
+import { ls } from '@/lib/i18n/local-string'
 
 export function ModuleDoc({ id }: { id: string }) {
   const t = useT()
+  const { locale } = useLanguage()
   const index = MODULES.findIndex((m) => m.id === id)
   if (index === -1) return null
   const active = MODULES[index]
@@ -62,7 +64,7 @@ export function ModuleDoc({ id }: { id: string }) {
                 {active.name}
               </h1>
               <p className="mt-1.5 text-sm text-muted-foreground sm:text-base">
-                {active.short}
+                {ls(active.short, locale)}
               </p>
             </div>
           </div>
@@ -77,7 +79,7 @@ export function ModuleDoc({ id }: { id: string }) {
               {t('common.overview')}
             </h2>
             <p className="max-w-3xl text-sm leading-relaxed text-foreground/90 sm:text-base">
-              {active.description}
+              {ls(active.description, locale)}
             </p>
           </section>
 
@@ -90,14 +92,14 @@ export function ModuleDoc({ id }: { id: string }) {
             <ol className="flex max-w-3xl flex-col gap-3">
               {active.usage.map((step, idx) => (
                 <li
-                  key={step}
+                  key={idx}
                   className="flex items-start gap-3 rounded-lg border border-border/50 bg-muted/20 p-3"
                 >
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/10 font-mono text-[11px] font-semibold text-primary">
                     {idx + 1}
                   </span>
                   <span className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                    {step}
+                    {ls(step, locale)}
                   </span>
                 </li>
               ))}
@@ -111,13 +113,13 @@ export function ModuleDoc({ id }: { id: string }) {
               {t('common.whatItInspects')}
             </h2>
             <ul className="grid max-w-3xl gap-2 sm:grid-cols-2">
-              {active.checks.map((c) => (
+              {active.checks.map((c, idx) => (
                 <li
-                  key={c}
+                  key={idx}
                   className="flex items-start gap-2.5 rounded-lg border border-border/50 bg-card/40 p-3 text-sm"
                 >
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span className="leading-relaxed text-foreground/90">{c}</span>
+                  <span className="leading-relaxed text-foreground/90">{ls(c, locale)}</span>
                 </li>
               ))}
             </ul>
@@ -132,7 +134,7 @@ export function ModuleDoc({ id }: { id: string }) {
               </h2>
               <div className="max-w-3xl rounded-lg border border-sky-500/30 bg-sky-500/[0.07] p-4">
                 <p className="text-sm leading-relaxed text-sky-100/80 sm:text-base">
-                  {active.notes}
+                  {ls(active.notes, locale)}
                 </p>
               </div>
             </section>

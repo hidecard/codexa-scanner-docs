@@ -4,7 +4,9 @@ import Link from 'next/link'
 import { ArrowUpRight, BookOpen, ShieldAlert } from 'lucide-react'
 import { MODULES } from '@/lib/codexa-data'
 import { GUIDE_ARTICLES } from '@/lib/guide-articles'
-import { useT } from '@/components/i18n/language-provider'
+import { useT, useLanguage } from '@/components/i18n/language-provider'
+import { ls } from '@/lib/i18n/local-string'
+import type { LocalString } from '@/lib/i18n/local-string'
 
 function DocCard({
   id,
@@ -14,9 +16,10 @@ function DocCard({
 }: {
   id: string
   name: string
-  short: string
+  short: LocalString
   icon: any
 }) {
+  const { locale } = useLanguage()
   return (
     <Link
       href={`/guides/${id}`}
@@ -31,7 +34,7 @@ function DocCard({
           <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground transition group-hover:text-primary" />
         </h3>
         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-          {short}
+          {ls(short, locale)}
         </p>
       </div>
     </Link>

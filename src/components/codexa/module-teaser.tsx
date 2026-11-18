@@ -5,10 +5,12 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { MODULES } from '@/lib/codexa-data'
 import { SectionHeading } from './section-heading'
-import { useT } from '@/components/i18n/language-provider'
+import { useT, useLanguage } from '@/components/i18n/language-provider'
+import { ls } from '@/lib/i18n/local-string'
 
 export function ModuleTeaser() {
   const t = useT()
+  const { locale } = useLanguage()
   return (
     <section className="relative py-20 sm:py-24">
       <div className="absolute inset-0 -z-10 dot-pattern opacity-30 mask-fade-b" />
@@ -48,7 +50,7 @@ export function ModuleTeaser() {
                   </div>
                   <h3 className="text-sm font-semibold">{m.name}</h3>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                    {m.short}
+                    {ls(m.short, locale)}
                   </p>
                 </Link>
               </motion.div>

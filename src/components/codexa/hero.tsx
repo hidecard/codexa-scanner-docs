@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { PROJECT, STATS } from '@/lib/codexa-data'
 import { AppMockup } from './app-mockup'
-import { useT } from '@/components/i18n/language-provider'
-import type { DictKey } from '@/lib/i18n/dictionary'
+import { useT, useLanguage } from '@/components/i18n/language-provider'
+import { ls } from '@/lib/i18n/local-string'
 
 const PLATFORM_BADGES = [
   { icon: Terminal, label: 'Linux' },
@@ -16,15 +16,9 @@ const PLATFORM_BADGES = [
   { icon: Layers, label: 'macOS' },
 ]
 
-const STAT_LABEL: Record<string, DictKey> = {
-  Platforms: 'hero.platforms',
-  Modules: 'hero.modules',
-  Version: 'hero.version',
-  License: 'hero.license',
-}
-
 export function Hero() {
   const t = useT()
+  const { locale } = useLanguage()
   return (
     <section id="top" className="relative overflow-hidden pt-24 sm:pt-28">
       {/* background layers */}
@@ -109,16 +103,13 @@ export function Hero() {
             {/* stats */}
             <dl className="mt-10 grid w-full max-w-lg grid-cols-2 gap-px overflow-hidden rounded-xl border border-border/60 bg-border/60 sm:grid-cols-4">
               {STATS.map((s) => {
-                const labelKey = STAT_LABEL[s.label] ?? 'hero.platforms'
-                const value =
-                  s.value === 'Open Source' ? t('hero.openSource') : s.value
                 return (
-                  <div key={s.label} className="bg-card/80 px-4 py-3">
+                  <div key={s.label.en} className="bg-card/80 px-4 py-3">
                     <dt className="text-[11px] uppercase tracking-wider text-muted-foreground">
-                      {t(labelKey)}
+                      {ls(s.label, locale)}
                     </dt>
                     <dd className="mt-0.5 text-lg font-semibold text-foreground">
-                      {value}
+                      {ls(s.value, locale)}
                     </dd>
                   </div>
                 )

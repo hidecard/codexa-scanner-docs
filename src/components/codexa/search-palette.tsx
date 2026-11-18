@@ -83,7 +83,7 @@ export function SearchPalette() {
     const modules: SearchEntry[] = MODULES.map((m) => ({
       id: `mod-${m.id}`,
       label: m.name,
-      keywords: `${m.name} ${m.short} ${m.description} ${m.usage.join(' ')} ${m.checks.join(' ')}`,
+      keywords: `${m.name} ${m.short.en} ${m.description.en} ${m.usage.map((u) => u.en).join(' ')} ${m.checks.map((c) => c.en).join(' ')}`,
       href: `/guides/${m.id}`,
       group: 'Modules',
       icon: m.icon,
@@ -91,7 +91,7 @@ export function SearchPalette() {
     const articles: SearchEntry[] = GUIDE_ARTICLES.map((a) => ({
       id: `art-${a.id}`,
       label: a.name,
-      keywords: `${a.name} ${a.short} ${a.intro} ${a.sections.map((s) => s.title).join(' ')}`,
+      keywords: `${a.name} ${a.short.en} ${a.intro.en} ${a.sections.map((s) => s.title.en).join(' ')}`,
       href: `/guides/${a.id}`,
       group: a.category,
       icon: a.icon,

@@ -5,6 +5,10 @@ import { Check, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { PLATFORMS } from '@/lib/codexa-data'
 import { SectionHeading } from './section-heading'
+import { useLanguage } from '@/components/i18n/language-provider'
+import { useT } from '@/components/i18n/language-provider'
+import { ls } from '@/lib/i18n/local-string'
+import type { LocalString } from '@/lib/i18n/local-string'
 
 const ACCENTS: Record<string, string> = {
   emerald:
@@ -14,8 +18,21 @@ const ACCENTS: Record<string, string> = {
   sky: 'border-sky-500/30 bg-sky-500/10 text-sky-400 group-hover:border-sky-500/50',
 }
 
+const EYEBROW: LocalString = { en: 'Cross-platform', my: 'ခရိုစ်-ပလက်ဖောင်း' }
+const TITLE_PRE: LocalString = { en: 'One app, ', my: 'App တစ်ခု၊ ' }
+const TITLE_HL: LocalString = { en: 'every desktop', my: 'desktop တိုင်း' }
+const DESC: LocalString = {
+  en: 'Built on Wails v2, Codexa Scanner ships native builds for Linux, Windows and macOS — including separate Intel and Apple Silicon DMGs.',
+  my: 'Wails v2 ပေါ်မှာတည်ဆောက်၊ Codexa Scanner က Linux, Windows, macOS အတွက် native build တွေထုတ်တယ် — Intel နဲ့ Apple Silicon DMG တွေကိုလည်း ခွဲထုတ်တယ်။',
+}
+const FOOTER_NOTE: LocalString = {
+  en: 'macOS DMGs are unsigned & not notarized. Use Finder → Open the first time if Gatekeeper blocks the launch.',
+  my: 'macOS DMG တွေက unsigned + notarize မလုပ်ထားပါ။ Gatekeeper တားရင် ပထမဆုံး Finder → Open နဲ့ဖွင့်ပါ။',
+}
+
 export function Platforms() {
-  // dedupe by OS for the overview cards (show one card per OS)
+  const { locale } = useLanguage()
+  const t = useT()
   const overview = [
     PLATFORMS.find((p) => p.os === 'Linux')!,
     PLATFORMS.find((p) => p.os === 'Windows')!,
@@ -26,13 +43,14 @@ export function Platforms() {
     <section id="platforms" className="relative pt-28 pb-20 sm:pt-32 sm:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Cross-platform"
+          eyebrow={ls(EYEBROW, locale)}
           title={
             <>
-              One app, <span className="text-primary">every desktop</span>
+              {ls(TITLE_PRE, locale)}
+              <span className="text-primary">{ls(TITLE_HL, locale)}</span>
             </>
           }
-          description="Built on Wails v2, Codexa Scanner ships native builds for Linux, Windows and macOS — including separate Intel and Apple Silicon DMGs."
+          description={ls(DESC, locale)}
         />
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
@@ -62,17 +80,17 @@ export function Platforms() {
                   </span>
                 </div>
                 <p className="mt-1.5 text-sm text-muted-foreground">
-                  {p.size} · {p.format}
+                  {ls(p.size, locale)} · {p.format}
                 </p>
 
                 <ul className="mt-5 flex flex-1 flex-col gap-2">
-                  {p.install.slice(0, 3).map((step) => (
+                  {p.install.slice(0, 3).map((step, idx) => (
                     <li
-                      key={step}
+                      key={idx}
                       className="flex items-start gap-2 text-sm text-muted-foreground"
                     >
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                      <span>{step}</span>
+                      <span>{ls(step, locale)}</span>
                     </li>
                   ))}
                 </ul>
@@ -80,7 +98,7 @@ export function Platforms() {
                 <Button asChild className="mt-6 w-full">
                   <a href={p.url} target="_blank" rel="noopener noreferrer">
                     <Download className="mr-2 h-4 w-4" />
-                    Download {p.format}
+                    {t('common.download')} {p.format}
                   </a>
                 </Button>
               </motion.div>
@@ -89,11 +107,7 @@ export function Platforms() {
         </div>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          macOS DMGs are unsigned &amp; not notarized. Use{' '}
-          <span className="font-medium text-foreground">
-            Finder → Open
-          </span>{' '}
-          the first time if Gatekeeper blocks the launch.
+          {ls(FOOTER_NOTE, locale)}
         </p>
       </div>
     </section>

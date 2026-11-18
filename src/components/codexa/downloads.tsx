@@ -8,6 +8,9 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { PLATFORMS, PROJECT } from '@/lib/codexa-data'
 import { SectionHeading } from './section-heading'
+import { useLanguage, useT } from '@/components/i18n/language-provider'
+import { ls } from '@/lib/i18n/local-string'
+import type { LocalString } from '@/lib/i18n/local-string'
 
 function CopyBlock({ code }: { code: string }) {
   const [copied, setCopied] = useState(false)
@@ -55,7 +58,24 @@ wails build -platform darwin/amd64     # macOS Intel
 # For development
 wails dev`
 
+const EYEBROW: LocalString = { en: 'Download', my: 'ဒေါင်းလုဒ်' }
+const TITLE_PRE: LocalString = { en: 'Get ', my: 'ယူပါ ' }
+const TITLE_HL: LocalString = { en: 'Codexa Scanner', my: 'Codexa Scanner' }
+const DESC: LocalString = {
+  en: 'Pick the build for your operating system. All assets are published on the GitHub Releases page and built by GitHub Actions CI.',
+  my: 'သင့် operating system အတွက် build ရွေးပါ။ Asset အကုန်ကို GitHub Releases page မှာတင်ပြီး GitHub Actions CI ကထုတ်တယ်။',
+}
+const INSTALL_LABEL: LocalString = { en: 'Install steps', my: 'Install အဆင့်တွေ' }
+const BFS_HEADING: LocalString = { en: 'Build from source', my: 'Source ကနေ build' }
+const BFS_DESC: LocalString = {
+  en: 'Prefer to compile yourself? Codexa Scanner builds cleanly with Go, Wails and a standard npm frontend pipeline.',
+  my: 'ကိုယ်တိုင် compile လုပ်ချင်လား? Codexa Scanner ကို Go, Wails နဲ့ npm frontend pipeline နဲ့ သန့်စင်စွာ build လုပ်လို့ရတယ်။',
+}
+const ALL_RELEASES: LocalString = { en: 'All releases', my: 'ထွက်ရှိမှုအကုန်' }
+
 export function Downloads() {
+  const { locale } = useLanguage()
+  const t = useT()
   return (
     <section id="download" className="relative py-20 sm:py-28">
       <div className="absolute inset-0 -z-10 grid-pattern opacity-30" />
@@ -63,13 +83,15 @@ export function Downloads() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Download"
+          eyebrow={ls(EYEBROW, locale)}
           title={
             <>
-              Get <span className="text-primary">Codexa Scanner</span> {PROJECT.version}
+              {ls(TITLE_PRE, locale)}
+              <span className="text-primary">{ls(TITLE_HL, locale)}</span>{' '}
+              {PROJECT.version}
             </>
           }
-          description="Pick the build for your operating system. All assets are published on the GitHub Releases page and built by GitHub Actions CI."
+          description={ls(DESC, locale)}
         />
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.1fr_1fr]">
@@ -125,26 +147,26 @@ export function Downloads() {
 
                     {p.note && (
                       <p className="mt-4 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-300">
-                        {p.note}
+                        {ls(p.note, locale)}
                       </p>
                     )}
 
                     <div className="mt-5">
                       <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                         <span className="font-mono text-primary">›</span>
-                        Install steps
+                        {ls(INSTALL_LABEL, locale)}
                       </p>
                       <ol className="flex flex-col gap-2">
                         {p.install.map((step, idx) => (
                           <li
-                            key={step}
+                            key={idx}
                             className="flex items-start gap-3 text-sm"
                           >
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/10 font-mono text-[10px] text-primary">
                               {idx + 1}
                             </span>
                             <span className="text-muted-foreground">
-                              {step}
+                              {ls(step, locale)}
                             </span>
                           </li>
                         ))}
@@ -154,7 +176,7 @@ export function Downloads() {
                     <Button asChild className="mt-6 w-full">
                       <a href={p.url} target="_blank" rel="noopener noreferrer">
                         <Download className="mr-2 h-4 w-4" />
-                        Download {p.file}
+                        {t('common.download')} {p.file}
                         <ExternalLink className="ml-2 h-3.5 w-3.5 opacity-60" />
                       </a>
                     </Button>
@@ -174,11 +196,10 @@ export function Downloads() {
           >
             <div className="mb-4 flex items-center gap-2">
               <Terminal className="h-5 w-5 text-primary" />
-              <h3 className="text-base font-semibold">Build from source</h3>
+              <h3 className="text-base font-semibold">{ls(BFS_HEADING, locale)}</h3>
             </div>
             <p className="mb-4 text-sm text-muted-foreground">
-              Prefer to compile yourself? Codexa Scanner builds cleanly with Go,
-              Wails and a standard npm frontend pipeline.
+              {ls(BFS_DESC, locale)}
             </p>
             <div className="flex-1">
               <CopyBlock code={BUILD_SOURCE} />
@@ -187,13 +208,13 @@ export function Downloads() {
               <Button asChild variant="outline" size="sm">
                 <a href={PROJECT.releases} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
-                  All releases
+                  {ls(ALL_RELEASES, locale)}
                 </a>
               </Button>
               <Button asChild variant="outline" size="sm">
                 <a href={PROJECT.docs} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
-                  Documentation
+                  {t('common.documentation')}
                 </a>
               </Button>
             </div>

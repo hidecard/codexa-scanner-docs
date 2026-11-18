@@ -6,26 +6,30 @@ import { ArrowRight, ArrowLeft, Info, ShieldAlert } from 'lucide-react'
 import { GUIDE_ARTICLES, type DocBlock } from '@/lib/guide-articles'
 import { TableOfContents } from './table-of-contents'
 import { CopyBlock } from './copy-block'
-import { useT } from '@/components/i18n/language-provider'
+import { useT, useLanguage } from '@/components/i18n/language-provider'
+import { ls } from '@/lib/i18n/local-string'
+import type { Locale } from '@/lib/i18n/dictionary'
 
-function Block({ block }: { block: DocBlock }) {
+function Block({ block, locale }: { block: DocBlock; locale: Locale }) {
   switch (block.kind) {
     case 'paragraph':
       return (
         <p className="max-w-3xl text-sm leading-relaxed text-foreground/90 sm:text-base">
-          {block.text}
+          {ls(block.text, locale)}
         </p>
       )
     case 'list':
       return (
         <ul className="flex max-w-3xl flex-col gap-2">
-          {block.items.map((item) => (
+          {block.items.map((item, idx) => (
             <li
-              key={item}
+              key={idx}
               className="flex items-start gap-2.5 rounded-lg border border-border/50 bg-muted/20 p-3 text-sm sm:text-base"
             >
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-              <span className="leading-relaxed text-foreground/90">{item}</span>
+              <span className="leading-relaxed text-foreground/90">
+                {ls(item, locale)}
+              </span>
             </li>
           ))}
         </ul>
@@ -57,7 +61,7 @@ function Block({ block }: { block: DocBlock }) {
               ) : (
                 <Info className="h-3.5 w-3.5" />
               )}
-              {block.title}
+              {ls(block.title, locale)}
             </h4>
           )}
           <p
@@ -65,7 +69,7 @@ function Block({ block }: { block: DocBlock }) {
               isWarning ? 'text-amber-100/80' : 'text-sky-100/80'
             }`}
           >
-            {block.text}
+            {ls(block.text, locale)}
           </p>
         </div>
       )
@@ -77,6 +81,7 @@ function Block({ block }: { block: DocBlock }) {
 
 export function ArticleDoc({ id }: { id: string }) {
   const t = useT()
+  const { locale } = useLanguage()
   const index = GUIDE_ARTICLES.findIndex((a) => a.id === id)
   if (index === -1) return null
   const active = GUIDE_ARTICLES[index]
@@ -85,7 +90,10 @@ export function ArticleDoc({ id }: { id: string }) {
     index < GUIDE_ARTICLES.length - 1 ? GUIDE_ARTICLES[index + 1] : null
   const Icon = active.icon
 
-  const tocItems = active.sections.map((s) => ({ id: s.id, label: s.title }))
+  const tocItems = active.sections.map((s) => ({
+    id: s.id,
+    label: ls(s.title, locale),
+  }))
 
   return (
     <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_200px] xl:gap-10">
@@ -124,7 +132,7 @@ export function ArticleDoc({ id }: { id: string }) {
               </div>
             </div>
             <p className="mt-4 max-w-2xl text-sm text-muted-foreground sm:text-base">
-              {active.intro}
+              {ls(active.intro, locale)}
             </p>
           </div>
 
@@ -134,11 +142,11 @@ export function ArticleDoc({ id }: { id: string }) {
               <section key={section.id} id={section.id} className="scroll-mt-24">
                 <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
                   <span className="font-mono text-primary">›</span>
-                  {section.title}
+                  {ls(section.title, locale)}
                 </h2>
                 <div className="flex flex-col gap-4">
                   {section.blocks.map((block, i) => (
-                    <Block key={i} block={block} />
+                    <Block key={i} block={block} locale={locale} />
                   ))}
                 </div>
               </section>

@@ -16,9 +16,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { module: id } = await params
   const mod = MODULES.find((m) => m.id === id)
-  if (mod) return { title: mod.name, description: mod.short }
+  if (mod) return { title: mod.name, description: mod.short.en }
   const article = GUIDE_ARTICLES.find((a) => a.id === id)
-  if (article) return { title: article.name, description: article.short }
+  if (article) return { title: article.name, description: article.short.en }
   return { title: 'Not found' }
 }
 

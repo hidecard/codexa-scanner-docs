@@ -7,6 +7,20 @@ import { RELEASES } from '@/lib/changelog'
 import { PROJECT } from '@/lib/codexa-data'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { useLanguage, useT } from '@/components/i18n/language-provider'
+import { ls } from '@/lib/i18n/local-string'
+import type { LocalString } from '@/lib/i18n/local-string'
+
+const EYEBROW: LocalString = { en: 'Changelog', my: 'ပြောင်းလဲမှုမှတ်တမ်း' }
+const TITLE: LocalString = { en: 'Release history', my: 'ထွက်ရှိမှု မှတ်တမ်း' }
+const DESC: LocalString = {
+  en: 'Every version of Codexa Scanner, from the initial cross-platform release to the latest macOS DMG builds. Releases are built by GitHub Actions CI; highlights are derived from the commit history.',
+  my: 'Codexa Scanner ရဲ့ version တိုင်း၊ ပထမခရိုစ်-ပလက်ဖောင်း ထွက်ရှိမှုကနေ နောက်ဆုံး macOS DMG build ထိ။ Release တွေက GitHub Actions CI နဲ့ build; highlight တွေက commit history ကနေရယူ။',
+}
+const DOWNLOAD_LATEST: LocalString = { en: 'Download latest', my: 'နောက်ဆုံးဒေါင်းလုဒ်' }
+const ASSETS: LocalString = { en: 'Assets', my: 'Asset တွေ' }
+const FULL_CHANGELOG: LocalString = { en: 'Full changelog', my: 'အပြည့်အဝ changelog' }
+const LATEST_BADGE: LocalString = { en: 'Latest', my: 'နောက်ဆုံး' }
 
 function formatDate(iso: string) {
   const d = new Date(iso)
@@ -18,6 +32,8 @@ function formatDate(iso: string) {
 }
 
 export function ChangelogContent() {
+  const { locale } = useLanguage()
+  const t = useT()
   return (
     <div className="pt-28 pb-20 sm:pt-32 sm:pb-28">
       <div className="absolute inset-x-0 top-0 -z-10 h-[300px] bg-gradient-to-b from-primary/5 to-transparent" />
@@ -33,27 +49,25 @@ export function ChangelogContent() {
             className="mb-4 gap-1.5 border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-primary"
           >
             <Sparkles className="h-3.5 w-3.5" />
-            Changelog
+            {ls(EYEBROW, locale)}
           </Badge>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Release history
+            {ls(TITLE, locale)}
           </h1>
           <p className="mt-3 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Every version of Codexa Scanner, from the initial cross-platform
-            release to the latest macOS DMG builds. Releases are built by GitHub
-            Actions CI; highlights are derived from the commit history.
+            {ls(DESC, locale)}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="sm" className="h-9">
               <Link href="/download">
                 <Download className="mr-1.5 h-4 w-4" />
-                Download latest
+                {ls(DOWNLOAD_LATEST, locale)}
               </Link>
             </Button>
             <Button asChild variant="outline" size="sm" className="h-9">
               <a href={PROJECT.releases} target="_blank" rel="noopener noreferrer">
                 <ArrowUpRight className="mr-1.5 h-4 w-4" />
-                GitHub Releases
+                {t('footer.releases')}
               </a>
             </Button>
           </div>
@@ -91,7 +105,7 @@ export function ChangelogContent() {
                     </h2>
                     {rel.latest && (
                       <Badge className="bg-primary/15 text-primary">
-                        Latest
+                        {ls(LATEST_BADGE, locale)}
                       </Badge>
                     )}
                     <span className="text-xs text-muted-foreground">
@@ -100,17 +114,17 @@ export function ChangelogContent() {
                   </div>
 
                   <p className="mt-2 text-sm text-muted-foreground sm:text-base">
-                    {rel.summary}
+                    {ls(rel.summary, locale)}
                   </p>
 
                   <ul className="mt-4 flex flex-col gap-1.5">
-                    {rel.highlights.map((h) => (
+                    {rel.highlights.map((h, idx) => (
                       <li
-                        key={h}
+                        key={idx}
                         className="flex items-start gap-2 text-sm text-foreground/90"
                       >
                         <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
-                        <span className="leading-relaxed">{h}</span>
+                        <span className="leading-relaxed">{ls(h, locale)}</span>
                       </li>
                     ))}
                   </ul>
@@ -118,7 +132,7 @@ export function ChangelogContent() {
                   {rel.assets && rel.assets.length > 0 && (
                     <div className="mt-4">
                       <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                        Assets
+                        {ls(ASSETS, locale)}
                       </p>
                       <div className="grid gap-1.5 sm:grid-cols-2">
                         {rel.assets.map((a) => (
@@ -146,7 +160,7 @@ export function ChangelogContent() {
                       className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
                     >
                       <GitCompare className="h-3.5 w-3.5" />
-                      Full changelog {rel.version}
+                      {ls(FULL_CHANGELOG, locale)} {rel.version}
                       <ArrowUpRight className="h-3 w-3 opacity-60" />
                     </a>
                     {rel.latest && (
@@ -155,7 +169,7 @@ export function ChangelogContent() {
                         className="inline-flex items-center gap-1 text-xs font-medium text-primary transition-colors hover:text-primary/80"
                       >
                         <Download className="h-3.5 w-3.5" />
-                        Download
+                        {t('common.download')}
                       </Link>
                     )}
                   </div>

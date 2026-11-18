@@ -3,8 +3,9 @@
 import Link from 'next/link'
 import { Radar, Github, ExternalLink, BookOpen, Download, Heart } from 'lucide-react'
 import { PROJECT, MODULES } from '@/lib/codexa-data'
-import { useT } from '@/components/i18n/language-provider'
+import { useT, useLanguage } from '@/components/i18n/language-provider'
 import type { DictKey } from '@/lib/i18n/dictionary'
+import { ls } from '@/lib/i18n/local-string'
 
 type FooterItem = { labelKey: DictKey; href: string; external?: boolean }
 type FooterCol = { titleKey: DictKey; items: FooterItem[] }
@@ -33,6 +34,7 @@ const LINKS: FooterCol[] = [
 
 export function Footer() {
   const t = useT()
+  const { locale } = useLanguage()
   return (
     <footer className="mt-auto border-t border-border/60 bg-card/40">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -51,7 +53,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              {PROJECT.description}
+              {ls(PROJECT.description, locale)}
             </p>
             <div className="mt-5 flex items-center gap-2">
               <a
