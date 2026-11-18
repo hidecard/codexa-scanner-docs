@@ -13,13 +13,13 @@ type Props = {
 export function DocsSidebar({ onNavigate }: Props) {
   const pathname = usePathname()
 
-  const isLanding = pathname === '/docs'
-  const activeModuleId = MODULES.find((m) => pathname === `/docs/${m.id}`)?.id
+  const isLanding = pathname === '/guides'
+  const activeModuleId = MODULES.find((m) => pathname === `/guides/${m.id}`)?.id
 
   return (
     <nav className="flex flex-col gap-1" aria-label="Documentation">
       <Link
-        href="/docs"
+        href="/guides"
         onClick={onNavigate}
         className={cn(
           'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
@@ -43,7 +43,7 @@ export function DocsSidebar({ onNavigate }: Props) {
           return (
             <li key={m.id}>
               <Link
-                href={`/docs/${m.id}`}
+                href={`/guides/${m.id}`}
                 onClick={onNavigate}
                 className={cn(
                   'group flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors',

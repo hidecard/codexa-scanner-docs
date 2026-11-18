@@ -36,7 +36,7 @@ export default function DocsIndexPage() {
             return (
               <Link
                 key={m.id}
-                href={`/docs/${m.id}`}
+                href={`/guides/${m.id}`}
                 className="group flex items-start gap-3 rounded-xl border border-border/60 bg-card/60 p-4 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card"
               >
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary/25 bg-primary/10">

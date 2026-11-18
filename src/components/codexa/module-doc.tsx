@@ -26,7 +26,7 @@ export function ModuleDoc({ id }: { id: string }) {
       <article className="min-w-0">
       {/* breadcrumb */}
       <nav className="mb-6 flex items-center gap-1.5 text-xs text-muted-foreground">
-        <Link href="/docs" className="transition-colors hover:text-foreground">
+        <Link href="/guides" className="transition-colors hover:text-foreground">
           Docs
         </Link>
         <span className="opacity-50">/</span>
@@ -134,7 +134,7 @@ export function ModuleDoc({ id }: { id: string }) {
         <div className="mt-12 grid gap-3 border-t border-border/60 pt-6 sm:grid-cols-2">
           {prev ? (
             <Link
-              href={`/docs/${prev.id}`}
+              href={`/guides/${prev.id}`}
               className="group flex flex-col rounded-xl border border-border/60 bg-card/40 p-4 transition hover:border-primary/40 hover:bg-card"
             >
               <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-muted-foreground">
@@ -151,7 +151,7 @@ export function ModuleDoc({ id }: { id: string }) {
           )}
           {next ? (
             <Link
-              href={`/docs/${next.id}`}
+              href={`/guides/${next.id}`}
               className="group flex flex-col items-end rounded-xl border border-border/60 bg-card/40 p-4 text-right transition hover:border-primary/40 hover:bg-card sm:items-end"
             >
               <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-muted-foreground">
