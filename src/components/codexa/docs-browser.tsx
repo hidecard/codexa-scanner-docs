@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronRight, Check, Info, ArrowRight, ArrowLeft, ListChecks } from 'lucide-react'
 import { MODULES } from '@/lib/codexa-data'
@@ -9,6 +9,31 @@ import { cn } from '@/lib/utils'
 
 export function DocsBrowser() {
   const [activeId, setActiveId] = useState(MODULES[0].id)
+
+  // Sync with URL hash so /features#web-audit deep-links into the docs.
+  const syncFromHash = useCallback(() => {
+    if (typeof window === 'undefined') return
+    const raw = window.location.hash.replace('#', '')
+    const match = MODULES.find((m) => m.id === raw)
+    if (match) setActiveId(match.id)
+  }, [])
+
+  useEffect(() => {
+    // Sync docs selection from URL hash on mount and on hashchange.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    syncFromHash()
+    window.addEventListener('hashchange', syncFromHash)
+    return () => window.removeEventListener('hashchange', syncFromHash)
+  }, [syncFromHash])
+
+  const selectModule = useCallback((id: string) => {
+    setActiveId(id)
+    // Update hash without causing a scroll jump (replaceState preserves position).
+    if (typeof window !== 'undefined') {
+      history.replaceState(null, '', `#${id}`)
+    }
+  }, [])
+
   const active = MODULES.find((m) => m.id === activeId) ?? MODULES[0]
   const activeIndex = MODULES.findIndex((m) => m.id === activeId)
   const prev = activeIndex > 0 ? MODULES[activeIndex - 1] : null
@@ -45,7 +70,7 @@ export function DocsBrowser() {
                     <li key={m.id} className="shrink-0 lg:shrink">
                       <button
                         type="button"
-                        onClick={() => setActiveId(m.id)}
+                        onClick={() => selectModule(m.id)}
                         className={cn(
                           'group flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm transition-all',
                           isActive
@@ -187,7 +212,7 @@ export function DocsBrowser() {
                 <div className="flex flex-col gap-3 border-t border-border/60 bg-muted/20 p-4 sm:flex-row sm:items-center sm:justify-between">
                   <button
                     type="button"
-                    onClick={() => prev && setActiveId(prev.id)}
+                    onClick={() => prev && selectModule(prev.id)}
                     disabled={!prev}
                     className="group flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition enabled:hover:text-foreground disabled:opacity-30"
                   >
@@ -206,7 +231,7 @@ export function DocsBrowser() {
                   </span>
                   <button
                     type="button"
-                    onClick={() => next && setActiveId(next.id)}
+                    onClick={() => next && selectModule(next.id)}
                     disabled={!next}
                     className="group flex items-center justify-end gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition enabled:hover:text-foreground disabled:opacity-30"
                   >

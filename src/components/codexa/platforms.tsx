@@ -23,7 +23,7 @@ export function Platforms() {
   ]
 
   return (
-    <section id="platforms" className="relative py-20 sm:py-28">
+    <section id="platforms" className="relative pt-28 pb-20 sm:pt-32 sm:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Cross-platform"

@@ -7,7 +7,7 @@ import { SectionHeading } from './section-heading'
 
 export function Modules() {
   return (
-    <section id="features" className="relative py-20 sm:py-28">
+    <section id="features" className="relative pt-28 pb-20 sm:pt-32 sm:pb-28">
       <div className="absolute inset-0 -z-10 dot-pattern opacity-40 mask-fade-b" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading

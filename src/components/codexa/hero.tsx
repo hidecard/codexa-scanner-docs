@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Download, ShieldCheck, Terminal, Cpu, Layers } from 'lucide-react'
+import Link from 'next/link'
+import { Github, Download, ShieldCheck, Terminal, Cpu, Layers, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { PROJECT, STATS } from '@/lib/codexa-data'
@@ -79,10 +80,16 @@ export function Hero() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="h-12 px-6">
-                <a href="#download">
+                <Link href="/download">
                   <Download className="mr-2 h-4 w-4" />
                   Download for free
-                </a>
+                </Link>
+              </Button>
+              <Button asChild size="lg" className="h-12 px-6">
+                <Link href="/features">
+                  Explore features
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
               <Button
                 asChild

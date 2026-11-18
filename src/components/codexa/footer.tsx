@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Radar, Github, ExternalLink, BookOpen, Download, Heart } from 'lucide-react'
 import { PROJECT, MODULES } from '@/lib/codexa-data'
 
@@ -7,31 +8,18 @@ const LINKS = [
   {
     title: 'Product',
     items: [
-      { label: 'Features', href: '#features' },
-      { label: 'Cross-Platform', href: '#platforms' },
-      { label: 'How it works', href: '#how-it-works' },
-      { label: 'Quick Start', href: '#quick-start' },
+      { label: 'Home', href: '/' },
+      { label: 'Features', href: '/features' },
+      { label: 'Download', href: '/download' },
+      { label: 'Guide', href: '/guide' },
     ],
   },
   {
     title: 'Resources',
     items: [
-      { label: 'Download', href: '#download' },
-      {
-        label: 'Documentation',
-        href: PROJECT.docs,
-        external: true,
-      },
-      {
-        label: 'GitHub Releases',
-        href: PROJECT.releases,
-        external: true,
-      },
-      {
-        label: 'Repository',
-        href: PROJECT.repo,
-        external: true,
-      },
+      { label: 'Documentation', href: '/features' },
+      { label: 'Releases', href: PROJECT.releases, external: true },
+      { label: 'Repository', href: PROJECT.repo, external: true },
     ],
   },
 ]
@@ -40,10 +28,10 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-border/60 bg-card/40">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* brand */}
           <div>
-            <a href="#top" className="flex items-center gap-2.5">
+            <Link href="/" className="flex items-center gap-2.5">
               <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-primary/30 bg-primary/10">
                 <Radar className="h-5 w-5 text-primary" />
               </span>
@@ -53,7 +41,7 @@ export function Footer() {
                   {PROJECT.version}
                 </span>
               </span>
-            </a>
+            </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               {PROJECT.description}
             </p>
@@ -76,15 +64,13 @@ export function Footer() {
               >
                 <Download className="h-4 w-4" />
               </a>
-              <a
-                href={PROJECT.docs}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/features"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border/60 bg-muted/40 text-muted-foreground transition hover:border-primary/40 hover:text-primary"
                 aria-label="Documentation"
               >
                 <BookOpen className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -97,17 +83,24 @@ export function Footer() {
               <ul className="mt-4 flex flex-col gap-2.5">
                 {col.items.map((item) => (
                   <li key={item.label}>
-                    <a
-                      href={item.href}
-                      target={item.external ? '_blank' : undefined}
-                      rel={item.external ? 'noopener noreferrer' : undefined}
-                      className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {item.label}
-                      {item.external && (
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {item.label}
                         <ExternalLink className="h-3 w-3 opacity-60" />
-                      )}
-                    </a>
+                      </a>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -122,12 +115,12 @@ export function Footer() {
             <ul className="mt-4 grid grid-cols-1 gap-2.5">
               {MODULES.map((m) => (
                 <li key={m.id}>
-                  <a
-                    href={`#${m.id}`}
+                  <Link
+                    href={`/features#${m.id}`}
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {m.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
