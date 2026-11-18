@@ -1,0 +1,74 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "@/components/theme-provider";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Codexa Scanner — Cross-Platform Network & Web Security Scanner",
+  description:
+    "Codexa Scanner is a cross-platform desktop app for network reconnaissance and HTTP security-header inspection. Built with Go, Wails, React and TypeScript. Available for Linux, Windows and macOS.",
+  keywords: [
+    "Codexa Scanner",
+    "network scanner",
+    "port scanner",
+    "HTTP security headers",
+    "web audit",
+    "TLS inspector",
+    "DNS intelligence",
+    "Wails",
+    "cross-platform",
+    "security tool",
+  ],
+  authors: [{ name: "H!D3-C4rD" }],
+  icons: {
+    icon: "/images/app-icon.png",
+  },
+  openGraph: {
+    title: "Codexa Scanner — Cross-Platform Security Scanner",
+    description:
+      "Desktop network reconnaissance and HTTP security-header inspection for Linux, Windows and macOS.",
+    url: "https://github.com/hidecard/codexa-scanner",
+    siteName: "Codexa Scanner",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Codexa Scanner",
+    description: "Cross-platform desktop network & web security scanner.",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
