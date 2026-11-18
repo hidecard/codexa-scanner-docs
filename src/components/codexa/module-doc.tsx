@@ -21,6 +21,13 @@ export function ModuleDoc({ id }: { id: string }) {
   const next = index < MODULES.length - 1 ? MODULES[index + 1] : null
   const Icon = active.icon
 
+  const tocItems = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'how-to-use', label: 'How to use' },
+    { id: 'what-it-inspects', label: 'What it inspects' },
+    ...(active.notes ? [{ id: 'good-to-know', label: 'Good to know' }] : []),
+  ]
+
   return (
     <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_200px] xl:gap-10">
       <article className="min-w-0">
@@ -173,7 +180,7 @@ export function ModuleDoc({ id }: { id: string }) {
       {/* TOC — sticky on xl */}
       <aside className="hidden xl:sticky xl:top-28 xl:block xl:self-start">
         <div className="rounded-xl border border-border/50 bg-muted/20 p-4">
-          <TableOfContents />
+          <TableOfContents sections={tocItems} />
         </div>
       </aside>
     </div>

@@ -3,20 +3,15 @@
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 
-const SECTIONS = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'how-to-use', label: 'How to use' },
-  { id: 'what-it-inspects', label: 'What it inspects' },
-  { id: 'good-to-know', label: 'Good to know' },
-]
+export type TocItem = { id: string; label: string }
 
-export function TableOfContents() {
-  const [active, setActive] = useState('overview')
+export function TableOfContents({ sections = [] }: { sections?: TocItem[] }) {
+  const [active, setActive] = useState(sections[0]?.id ?? '')
 
   useEffect(() => {
-    const headings = SECTIONS.map((s) => document.getElementById(s.id)).filter(
-      (el): el is HTMLElement => el !== null
-    )
+    const headings = sections
+      .map((s) => document.getElementById(s.id))
+      .filter((el): el is HTMLElement => el !== null)
     if (headings.length === 0) return
 
     const observer = new IntersectionObserver(
@@ -33,17 +28,16 @@ export function TableOfContents() {
 
     headings.forEach((h) => observer.observe(h))
     return () => observer.disconnect()
-  }, [])
+  }, [sections])
+
+  if (sections.length === 0) return null
 
   return (
-    <nav
-      className="flex flex-col gap-1 text-sm"
-      aria-label="On this page"
-    >
+    <nav className="flex flex-col gap-1 text-sm" aria-label="On this page">
       <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
         On this page
       </p>
-      {SECTIONS.map((s) => (
+      {sections.map((s) => (
         <a
           key={s.id}
           href={`#${s.id}`}

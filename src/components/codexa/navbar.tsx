@@ -15,6 +15,7 @@ const NAV_LINKS = [
   { label: 'Docs', href: '/guides' },
   { label: 'Download', href: '/download' },
   { label: 'Guide', href: '/guide' },
+  { label: 'About', href: '/about' },
 ]
 
 export function Navbar() {

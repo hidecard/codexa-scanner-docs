@@ -5,6 +5,7 @@ import { Menu, BookOpen, Search } from 'lucide-react'
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -51,6 +52,9 @@ export function DocsChrome({ children }: { children: React.ReactNode }) {
                   <SheetTitle className="text-left text-sm">
                     Documentation
                   </SheetTitle>
+                  <SheetDescription className="sr-only">
+                    Browse documentation modules and articles.
+                  </SheetDescription>
                 </SheetHeader>
                 <div className="p-3">
                   <DocsSidebar onNavigate={() => setOpen(false)} />

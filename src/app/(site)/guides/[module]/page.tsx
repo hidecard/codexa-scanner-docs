@@ -1,10 +1,12 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { MODULES } from '@/lib/codexa-data'
+import { GUIDE_ARTICLES } from '@/lib/guide-articles'
 import { ModuleDoc } from '@/components/codexa/module-doc'
+import { ArticleDoc } from '@/components/codexa/article-doc'
 
 export function generateStaticParams() {
-  return MODULES.map((m) => ({ module: m.id }))
+  return [...MODULES, ...GUIDE_ARTICLES].map((m) => ({ module: m.id }))
 }
 
 export async function generateMetadata({
@@ -14,21 +16,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { module: id } = await params
   const mod = MODULES.find((m) => m.id === id)
-  if (!mod) return { title: 'Not found' }
-  return {
-    title: mod.name,
-    description: mod.short,
-  }
+  if (mod) return { title: mod.name, description: mod.short }
+  const article = GUIDE_ARTICLES.find((a) => a.id === id)
+  if (article) return { title: article.name, description: article.short }
+  return { title: 'Not found' }
 }
 
-export default async function ModuleDocPage({
+export default async function GuideDocPage({
   params,
 }: {
   params: Promise<{ module: string }>
 }) {
   const { module: id } = await params
-  const mod = MODULES.find((m) => m.id === id)
-  if (!mod) notFound()
 
-  return <ModuleDoc id={id} />
+  if (MODULES.some((m) => m.id === id)) {
+    return <ModuleDoc id={id} />
+  }
+  if (GUIDE_ARTICLES.some((a) => a.id === id)) {
+    return <ArticleDoc id={id} />
+  }
+  notFound()
 }
