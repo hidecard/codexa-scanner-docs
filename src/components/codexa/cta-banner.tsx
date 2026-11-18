@@ -4,8 +4,10 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Download, BookOpen, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useT } from '@/components/i18n/language-provider'
 
 export function CtaBanner() {
+  const t = useT()
   return (
     <section className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -27,25 +29,23 @@ export function CtaBanner() {
           <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                Ready to run your first scan?
+                {t('cta.heading')}
               </h2>
               <p className="mt-3 text-sm text-muted-foreground sm:text-base">
-                Download Codexa Scanner for your platform, or read the guide to
-                see how the bounded, authorization-first workflow keeps every
-                check safe and reviewable.
+                {t('cta.desc')}
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="h-12 px-6">
                 <Link href="/download">
                   <Download className="mr-2 h-4 w-4" />
-                  Download
+                  {t('cta.download')}
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="h-12 px-6">
                 <Link href="/guide">
                   <BookOpen className="mr-2 h-4 w-4" />
-                  Read the guide
+                  {t('cta.readGuide')}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>

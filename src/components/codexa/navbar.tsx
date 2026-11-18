@@ -7,19 +7,23 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Github, Menu, X, Radar, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { LanguageToggle } from '@/components/i18n/language-toggle'
+import { useT } from '@/components/i18n/language-provider'
 import { PROJECT } from '@/lib/codexa-data'
 import { cn } from '@/lib/utils'
+import type { DictKey } from '@/lib/i18n/dictionary'
 
-const NAV_LINKS = [
-  { label: 'Features', href: '/features' },
-  { label: 'Docs', href: '/guides' },
-  { label: 'Download', href: '/download' },
-  { label: 'Guide', href: '/guide' },
-  { label: 'About', href: '/about' },
+const NAV_LINKS: { labelKey: DictKey; href: string }[] = [
+  { labelKey: 'nav.features', href: '/features' },
+  { labelKey: 'nav.docs', href: '/guides' },
+  { labelKey: 'nav.download', href: '/download' },
+  { labelKey: 'nav.guide', href: '/guide' },
+  { labelKey: 'nav.about', href: '/about' },
 ]
 
 export function Navbar() {
   const pathname = usePathname()
+  const t = useT()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -76,7 +80,7 @@ export function Navbar() {
                   : 'text-muted-foreground hover:text-foreground'
               )}
             >
-              {link.label}
+              {t(link.labelKey)}
               {isActive(link.href) && (
                 <motion.span
                   layoutId="nav-active"
@@ -88,6 +92,7 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          <LanguageToggle className="hidden sm:inline-flex" />
           <ThemeToggle />
           <Button
             asChild
@@ -97,20 +102,20 @@ export function Navbar() {
           >
             <a href={PROJECT.repo} target="_blank" rel="noopener noreferrer">
               <Github className="mr-1.5 h-4 w-4" />
-              GitHub
+              {t('nav.github')}
             </a>
           </Button>
           <Button asChild size="sm" className="h-9">
             <Link href="/download">
               <Download className="mr-1.5 h-4 w-4" />
-              Download
+              {t('nav.downloadBtn')}
             </Link>
           </Button>
           <Button
             variant="ghost"
             size="icon"
             className="h-9 w-9 lg:hidden"
-            aria-label="Toggle menu"
+            aria-label={t('nav.menuToggle')}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
@@ -129,6 +134,9 @@ export function Navbar() {
             className="overflow-hidden border-t border-border/60 bg-background/95 backdrop-blur-xl lg:hidden"
           >
             <div className="flex flex-col gap-1 px-4 py-3">
+              <div className="mb-1 px-3 sm:hidden">
+                <LanguageToggle />
+              </div>
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
@@ -140,7 +148,7 @@ export function Navbar() {
                       : 'text-muted-foreground'
                   )}
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </Link>
               ))}
               <a
@@ -149,7 +157,7 @@ export function Navbar() {
                 rel="noopener noreferrer"
                 className="mt-1 flex items-center gap-2 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
               >
-                <Github className="h-4 w-4" /> View on GitHub
+                <Github className="h-4 w-4" /> {t('common.viewGithub')}
               </a>
             </div>
           </motion.div>

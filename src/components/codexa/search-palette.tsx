@@ -13,6 +13,8 @@ import {
 } from '@/components/ui/command'
 import { MODULES, PROJECT } from '@/lib/codexa-data'
 import { GUIDE_ARTICLES } from '@/lib/guide-articles'
+import { useT } from '@/components/i18n/language-provider'
+import type { DictKey } from '@/lib/i18n/dictionary'
 import {
   Home,
   Radar,
@@ -46,6 +48,7 @@ const PAGES: SearchEntry[] = [
 export function SearchPalette() {
   const [open, setOpen] = useState(false)
   const router = useRouter()
+  const t = useT()
 
   const onOpen = useCallback(() => setOpen(true), [])
 
@@ -101,6 +104,13 @@ export function SearchPalette() {
     router.push(href)
   }
 
+  const groupLabel = (name: string): string => {
+    if (name === 'Getting Started') return t('common.gettingStarted')
+    if (name === 'Modules') return t('common.modules')
+    if (name === 'Reference') return t('common.reference')
+    return name
+  }
+
   const groups = [
     { name: 'Pages', entries: entries.filter((e) => e.group === 'Pages') },
     { name: 'Getting Started', entries: entries.filter((e) => e.group === 'Getting Started') },
@@ -112,15 +122,15 @@ export function SearchPalette() {
     <CommandDialog
       open={open}
       onOpenChange={setOpen}
-      title="Search Codexa Scanner"
-      description="Search pages, modules and documentation articles."
+      title={t('search.title')}
+      description={t('search.desc')}
     >
-      <CommandInput placeholder="Search docs, modules, pages…" />
+      <CommandInput placeholder={t('search.placeholder')} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty>{t('search.empty')}</CommandEmpty>
         {groups.map((g, gi) => (
           <div key={g.name}>
-            <CommandGroup heading={g.name}>
+            <CommandGroup heading={groupLabel(g.name)}>
               {g.entries.map((e) => {
                 const Icon = e.icon
                 return (

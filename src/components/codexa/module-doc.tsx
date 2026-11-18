@@ -12,8 +12,10 @@ import {
 } from 'lucide-react'
 import { MODULES } from '@/lib/codexa-data'
 import { TableOfContents } from './table-of-contents'
+import { useT } from '@/components/i18n/language-provider'
 
 export function ModuleDoc({ id }: { id: string }) {
+  const t = useT()
   const index = MODULES.findIndex((m) => m.id === id)
   if (index === -1) return null
   const active = MODULES[index]
@@ -22,10 +24,10 @@ export function ModuleDoc({ id }: { id: string }) {
   const Icon = active.icon
 
   const tocItems = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'how-to-use', label: 'How to use' },
-    { id: 'what-it-inspects', label: 'What it inspects' },
-    ...(active.notes ? [{ id: 'good-to-know', label: 'Good to know' }] : []),
+    { id: 'overview', label: t('common.overview') },
+    { id: 'how-to-use', label: t('common.howToUse') },
+    { id: 'what-it-inspects', label: t('common.whatItInspects') },
+    ...(active.notes ? [{ id: 'good-to-know', label: t('common.goodToKnow') }] : []),
   ]
 
   return (
@@ -34,7 +36,7 @@ export function ModuleDoc({ id }: { id: string }) {
       {/* breadcrumb */}
       <nav className="mb-6 flex items-center gap-1.5 text-xs text-muted-foreground">
         <Link href="/guides" className="transition-colors hover:text-foreground">
-          Docs
+          {t('common.docs')}
         </Link>
         <span className="opacity-50">/</span>
         <span className="text-foreground">{active.name}</span>
@@ -72,7 +74,7 @@ export function ModuleDoc({ id }: { id: string }) {
           <section id="overview" className="scroll-mt-24">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold">
               <span className="font-mono text-primary">›</span>
-              Overview
+              {t('common.overview')}
             </h2>
             <p className="max-w-3xl text-sm leading-relaxed text-foreground/90 sm:text-base">
               {active.description}
@@ -83,7 +85,7 @@ export function ModuleDoc({ id }: { id: string }) {
           <section id="how-to-use" className="scroll-mt-24">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
               <Terminal className="h-4 w-4 text-primary" />
-              How to use
+              {t('common.howToUse')}
             </h2>
             <ol className="flex max-w-3xl flex-col gap-3">
               {active.usage.map((step, idx) => (
@@ -106,7 +108,7 @@ export function ModuleDoc({ id }: { id: string }) {
           <section id="what-it-inspects" className="scroll-mt-24">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
               <ListChecks className="h-4 w-4 text-primary" />
-              What it inspects
+              {t('common.whatItInspects')}
             </h2>
             <ul className="grid max-w-3xl gap-2 sm:grid-cols-2">
               {active.checks.map((c) => (
@@ -126,7 +128,7 @@ export function ModuleDoc({ id }: { id: string }) {
             <section id="good-to-know" className="scroll-mt-24">
               <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
                 <Info className="h-4 w-4 text-primary" />
-                Good to know
+                {t('common.goodToKnow')}
               </h2>
               <div className="max-w-3xl rounded-lg border border-sky-500/30 bg-sky-500/[0.07] p-4">
                 <p className="text-sm leading-relaxed text-sky-100/80 sm:text-base">
@@ -146,7 +148,7 @@ export function ModuleDoc({ id }: { id: string }) {
             >
               <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-muted-foreground">
                 <ArrowLeft className="h-3 w-3 transition group-hover:-translate-x-0.5" />
-                Previous
+                {t('common.previous')}
               </span>
               <span className="mt-1 flex items-center gap-2 text-sm font-semibold">
                 <prev.icon className="h-4 w-4 text-primary" />
@@ -162,7 +164,7 @@ export function ModuleDoc({ id }: { id: string }) {
               className="group flex flex-col items-end rounded-xl border border-border/60 bg-card/40 p-4 text-right transition hover:border-primary/40 hover:bg-card sm:items-end"
             >
               <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-muted-foreground">
-                Next
+                {t('common.next')}
                 <ArrowRight className="h-3 w-3 transition group-hover:translate-x-0.5" />
               </span>
               <span className="mt-1 flex items-center gap-2 text-sm font-semibold">

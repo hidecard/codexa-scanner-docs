@@ -5,20 +5,24 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { MODULES } from '@/lib/codexa-data'
 import { SectionHeading } from './section-heading'
+import { useT } from '@/components/i18n/language-provider'
 
 export function ModuleTeaser() {
+  const t = useT()
   return (
     <section className="relative py-20 sm:py-24">
       <div className="absolute inset-0 -z-10 dot-pattern opacity-30 mask-fade-b" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Modules"
+          eyebrow={t('teaser.eyebrow')}
           title={
             <>
-              A complete <span className="text-primary">recon toolchain</span>
+              {t('teaser.title').split(t('teaser.titleHighlight'))[0]}
+              <span className="text-primary">{t('teaser.titleHighlight')}</span>
+              {t('teaser.title').split(t('teaser.titleHighlight'))[1]}
             </>
           }
-          description="Eight bounded modules cover discovery, inspection and reporting — each with its own documentation and usage guide."
+          description={t('teaser.desc')}
         />
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -57,7 +61,7 @@ export function ModuleTeaser() {
             href="/guides"
             className="inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-muted/40 px-4 py-2 text-sm font-medium text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
           >
-            Browse all modules &amp; docs
+            {t('teaser.browseAll')}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>

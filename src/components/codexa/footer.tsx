@@ -3,30 +3,36 @@
 import Link from 'next/link'
 import { Radar, Github, ExternalLink, BookOpen, Download, Heart } from 'lucide-react'
 import { PROJECT, MODULES } from '@/lib/codexa-data'
+import { useT } from '@/components/i18n/language-provider'
+import type { DictKey } from '@/lib/i18n/dictionary'
 
-const LINKS = [
+type FooterItem = { labelKey: DictKey; href: string; external?: boolean }
+type FooterCol = { titleKey: DictKey; items: FooterItem[] }
+
+const LINKS: FooterCol[] = [
   {
-    title: 'Product',
+    titleKey: 'footer.product',
     items: [
-      { label: 'Home', href: '/' },
-      { label: 'Features', href: '/features' },
-      { label: 'Download', href: '/download' },
-      { label: 'Guide', href: '/guide' },
-      { label: 'About', href: '/about' },
+      { labelKey: 'footer.home', href: '/' },
+      { labelKey: 'nav.features', href: '/features' },
+      { labelKey: 'nav.download', href: '/download' },
+      { labelKey: 'nav.guide', href: '/guide' },
+      { labelKey: 'nav.about', href: '/about' },
     ],
   },
   {
-    title: 'Resources',
+    titleKey: 'footer.resources',
     items: [
-      { label: 'Documentation', href: '/guides' },
-      { label: 'Changelog', href: '/changelog' },
-      { label: 'Releases', href: PROJECT.releases, external: true },
-      { label: 'Repository', href: PROJECT.repo, external: true },
+      { labelKey: 'common.documentation', href: '/guides' },
+      { labelKey: 'footer.changelog', href: '/changelog' },
+      { labelKey: 'footer.releases', href: PROJECT.releases, external: true },
+      { labelKey: 'footer.repository', href: PROJECT.repo, external: true },
     ],
   },
 ]
 
 export function Footer() {
+  const t = useT()
   return (
     <footer className="mt-auto border-t border-border/60 bg-card/40">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -78,13 +84,13 @@ export function Footer() {
 
           {/* link columns */}
           {LINKS.map((col) => (
-            <div key={col.title}>
+            <div key={col.titleKey}>
               <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                {col.title}
+                {t(col.titleKey)}
               </h4>
               <ul className="mt-4 flex flex-col gap-2.5">
                 {col.items.map((item) => (
-                  <li key={item.label}>
+                  <li key={item.labelKey}>
                     {item.external ? (
                       <a
                         href={item.href}
@@ -92,7 +98,7 @@ export function Footer() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
                       >
-                        {item.label}
+                        {t(item.labelKey)}
                         <ExternalLink className="h-3 w-3 opacity-60" />
                       </a>
                     ) : (
@@ -100,7 +106,7 @@ export function Footer() {
                         href={item.href}
                         className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                       >
-                        {item.label}
+                        {t(item.labelKey)}
                       </Link>
                     )}
                   </li>
@@ -112,7 +118,7 @@ export function Footer() {
           {/* modules */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Modules
+              {t('footer.modules')}
             </h4>
             <ul className="mt-4 grid grid-cols-1 gap-2.5">
               {MODULES.map((m) => (
@@ -131,11 +137,11 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border/50 pt-6 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} {PROJECT.name}. Developed by{' '}
+            © {new Date().getFullYear()} {PROJECT.name}. {t('footer.developedBy')}{' '}
             <span className="font-medium text-foreground">{PROJECT.author}</span>.
           </p>
           <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            Built for authorized testing &amp; defensive security work
+            {t('footer.builtFor')}
             <Heart className="h-3 w-3 text-primary" />
           </p>
         </div>

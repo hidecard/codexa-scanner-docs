@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { ChevronRight, Radar, Home } from 'lucide-react'
 import { MODULES } from '@/lib/codexa-data'
 import { GUIDE_ARTICLES } from '@/lib/guide-articles'
+import { useT } from '@/components/i18n/language-provider'
 import { cn } from '@/lib/utils'
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 
 export function DocsSidebar({ onNavigate }: Props) {
   const pathname = usePathname()
+  const t = useT()
 
   const isLanding = pathname === '/guides'
   const activeSlug = [...MODULES, ...GUIDE_ARTICLES].find(
@@ -74,23 +76,23 @@ export function DocsSidebar({ onNavigate }: Props) {
         )}
       >
         <Home className="h-4 w-4 text-primary" />
-        Overview
+        {t('common.overview')}
       </Link>
 
       <p className="px-3 pb-1 pt-5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-        Getting Started
+        {t('common.gettingStarted')}
       </p>
       <ul className="flex flex-col gap-0.5">
         {startedArticles.map(renderItem)}
       </ul>
 
       <p className="px-3 pb-1 pt-5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-        Modules
+        {t('common.modules')}
       </p>
       <ul className="flex flex-col gap-0.5">{MODULES.map(renderItem)}</ul>
 
       <p className="px-3 pb-1 pt-5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-        Reference
+        {t('common.reference')}
       </p>
       <ul className="flex flex-col gap-0.5">
         {referenceArticles.map(renderItem)}
@@ -98,7 +100,7 @@ export function DocsSidebar({ onNavigate }: Props) {
 
       <div className="mt-5 flex items-center gap-2 rounded-lg border border-border/50 bg-muted/20 px-3 py-2 text-[11px] text-muted-foreground">
         <Radar className="h-3.5 w-3.5 text-primary" />
-        v1.1.4 · {MODULES.length + GUIDE_ARTICLES.length} articles
+        {t('docschrome.versionNote', { n: MODULES.length + GUIDE_ARTICLES.length })}
       </div>
     </nav>
   )

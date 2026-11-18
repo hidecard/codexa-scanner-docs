@@ -11,9 +11,11 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { DocsSidebar } from './docs-sidebar'
+import { useT } from '@/components/i18n/language-provider'
 
 export function DocsChrome({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false)
+  const t = useT()
 
   return (
     <div className="pt-16">
@@ -22,7 +24,7 @@ export function DocsChrome({ children }: { children: React.ReactNode }) {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 text-sm">
             <BookOpen className="h-4 w-4 text-primary" />
-            <span className="font-semibold">Documentation</span>
+            <span className="font-semibold">{t('docschrome.title')}</span>
             <span className="hidden text-muted-foreground sm:inline">
               · Codexa Scanner v1.1.4
             </span>
@@ -34,10 +36,10 @@ export function DocsChrome({ children }: { children: React.ReactNode }) {
               type="button"
               onClick={() => window.dispatchEvent(new Event('open-search'))}
               className="hidden items-center gap-2 rounded-md border border-border/60 bg-muted/30 px-3 py-1.5 text-xs text-muted-foreground transition hover:border-primary/40 hover:text-foreground sm:flex"
-              aria-label="Search documentation"
+              aria-label={t('search.trigger')}
             >
               <Search className="h-3.5 w-3.5" />
-              <span>Search docs…</span>
+              <span>{t('search.trigger')}</span>
               <kbd className="rounded border border-border/60 bg-background px-1 font-mono text-[10px]">
                 /
               </kbd>
@@ -47,18 +49,18 @@ export function DocsChrome({ children }: { children: React.ReactNode }) {
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger
                 className="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-muted/40 px-3 py-1.5 text-xs font-medium lg:hidden"
-                aria-label="Open documentation menu"
+                aria-label={t('docschrome.modules')}
               >
                 <Menu className="h-4 w-4" />
-                Modules
+                {t('docschrome.modules')}
               </SheetTrigger>
               <SheetContent side="left" className="w-72 overflow-y-auto p-0">
                 <SheetHeader className="border-b border-border/60 px-4 py-3">
                   <SheetTitle className="text-left text-sm">
-                    Documentation
+                    {t('docschrome.title')}
                   </SheetTitle>
                   <SheetDescription className="sr-only">
-                    Browse documentation modules and articles.
+                    {t('docschrome.title')}
                   </SheetDescription>
                 </SheetHeader>
                 <div className="p-3">

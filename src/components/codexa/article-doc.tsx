@@ -6,6 +6,7 @@ import { ArrowRight, ArrowLeft, Info, ShieldAlert } from 'lucide-react'
 import { GUIDE_ARTICLES, type DocBlock } from '@/lib/guide-articles'
 import { TableOfContents } from './table-of-contents'
 import { CopyBlock } from './copy-block'
+import { useT } from '@/components/i18n/language-provider'
 
 function Block({ block }: { block: DocBlock }) {
   switch (block.kind) {
@@ -75,6 +76,7 @@ function Block({ block }: { block: DocBlock }) {
 }
 
 export function ArticleDoc({ id }: { id: string }) {
+  const t = useT()
   const index = GUIDE_ARTICLES.findIndex((a) => a.id === id)
   if (index === -1) return null
   const active = GUIDE_ARTICLES[index]
@@ -91,7 +93,7 @@ export function ArticleDoc({ id }: { id: string }) {
         {/* breadcrumb */}
         <nav className="mb-6 flex items-center gap-1.5 text-xs text-muted-foreground">
           <Link href="/guides" className="transition-colors hover:text-foreground">
-            Docs
+            {t('common.docs')}
           </Link>
           <span className="opacity-50">/</span>
           <span className="text-foreground">{active.name}</span>
@@ -152,7 +154,7 @@ export function ArticleDoc({ id }: { id: string }) {
               >
                 <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-muted-foreground">
                   <ArrowLeft className="h-3 w-3 transition group-hover:-translate-x-0.5" />
-                  Previous
+                  {t('common.previous')}
                 </span>
                 <span className="mt-1 flex items-center gap-2 text-sm font-semibold">
                   <prev.icon className="h-4 w-4 text-primary" />
@@ -168,7 +170,7 @@ export function ArticleDoc({ id }: { id: string }) {
                 className="group flex flex-col items-end rounded-xl border border-border/60 bg-card/40 p-4 text-right transition hover:border-primary/40 hover:bg-card sm:items-end"
               >
                 <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-muted-foreground">
-                  Next
+                  {t('common.next')}
                   <ArrowRight className="h-3 w-3 transition group-hover:translate-x-0.5" />
                 </span>
                 <span className="mt-1 flex items-center gap-2 text-sm font-semibold">

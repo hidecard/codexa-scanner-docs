@@ -2,40 +2,44 @@
 
 import { motion } from 'framer-motion'
 import { MonitorSmartphone, Boxes, ShieldCheck, Database } from 'lucide-react'
+import { useT } from '@/components/i18n/language-provider'
+import type { DictKey } from '@/lib/i18n/dictionary'
 
-const HIGHLIGHTS = [
-  {
-    icon: MonitorSmartphone,
-    title: 'Truly cross-platform',
-    body: 'Native builds for Linux, Windows and macOS — including separate Intel & Apple Silicon DMGs. One app, every desktop.',
-  },
-  {
-    icon: Boxes,
-    title: 'Eight modules in one',
-    body: 'Port scanning, web audit, subdomain discovery, path fuzzing, TLS, DNS, IP intel and history — a full recon toolchain.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Bounded & authorization-first',
-    body: 'Every scan requires explicit confirmation. Capped concurrency, timeouts and passive, non-exploitative checks throughout.',
-  },
-  {
-    icon: Database,
-    title: 'Local & private',
-    body: 'History lives in a local SQLite file, auto-pruned and never uploaded. Bounded redaction on stored data and exports.',
-  },
+const HIGHLIGHTS: { icon: any; titleKey: DictKey; bodyKey: DictKey }[] = [
+  { icon: MonitorSmartphone, titleKey: 'highlights.cross.title', bodyKey: 'highlights.cross.body' },
+  { icon: Boxes, titleKey: 'highlights.eight.title', bodyKey: 'highlights.eight.body' },
+  { icon: ShieldCheck, titleKey: 'highlights.bounded.title', bodyKey: 'highlights.bounded.body' },
+  { icon: Database, titleKey: 'highlights.local.title', bodyKey: 'highlights.local.body' },
 ]
 
 export function Highlights() {
+  const t = useT()
   return (
     <section className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 flex flex-col gap-3"
+        >
+          <span className="font-mono text-[11px] uppercase tracking-wider text-primary">
+            {t('highlights.eyebrow')}
+          </span>
+          <h2 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
+            {t('highlights.title').split(t('highlights.titleHighlight'))[0]}
+            <span className="text-primary">{t('highlights.titleHighlight')}</span>
+            {t('highlights.title').split(t('highlights.titleHighlight'))[1]}
+          </h2>
+        </motion.div>
+
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {HIGHLIGHTS.map((h, i) => {
             const Icon = h.icon
             return (
               <motion.div
-                key={h.title}
+                key={h.titleKey}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
@@ -50,10 +54,10 @@ export function Highlights() {
                   <Icon className="h-5 w-5 text-primary" />
                 </div>
                 <h3 className="text-base font-semibold tracking-tight">
-                  {h.title}
+                  {t(h.titleKey)}
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  {h.body}
+                  {t(h.bodyKey)}
                 </p>
               </motion.div>
             )

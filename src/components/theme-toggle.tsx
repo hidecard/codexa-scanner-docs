@@ -4,9 +4,11 @@ import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { useT } from '@/components/i18n/language-provider'
 
 export function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme()
+  const t = useT()
   const [mounted, setMounted] = useState(false)
 
   // Standard next-themes hydration guard — runs once on mount.
@@ -20,7 +22,7 @@ export function ThemeToggle() {
     <Button
       variant="ghost"
       size="icon"
-      aria-label="Toggle theme"
+      aria-label={t('theme.toggle')}
       className="h-9 w-9 rounded-full border border-border/60 bg-background/40 backdrop-blur"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
     >

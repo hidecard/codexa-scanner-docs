@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { PROJECT, STATS } from '@/lib/codexa-data'
 import { AppMockup } from './app-mockup'
+import { useT } from '@/components/i18n/language-provider'
+import type { DictKey } from '@/lib/i18n/dictionary'
 
 const PLATFORM_BADGES = [
   { icon: Terminal, label: 'Linux' },
@@ -14,7 +16,15 @@ const PLATFORM_BADGES = [
   { icon: Layers, label: 'macOS' },
 ]
 
+const STAT_LABEL: Record<string, DictKey> = {
+  Platforms: 'hero.platforms',
+  Modules: 'hero.modules',
+  Version: 'hero.version',
+  License: 'hero.license',
+}
+
 export function Hero() {
+  const t = useT()
   return (
     <section id="top" className="relative overflow-hidden pt-24 sm:pt-28">
       {/* background layers */}
@@ -42,7 +52,7 @@ export function Hero() {
               <span className="font-mono text-[11px]">{PROJECT.version}</span>
               <span className="text-muted-foreground">·</span>
               <span className="text-[11px] font-medium text-muted-foreground">
-                Latest release
+                {t('hero.latest')}
               </span>
             </Badge>
 
@@ -52,15 +62,7 @@ export function Hero() {
             </h1>
 
             <p className="mt-4 max-w-xl text-base text-muted-foreground sm:text-lg">
-              {PROJECT.tagline}. A desktop app for{' '}
-              <span className="font-medium text-foreground">
-                network reconnaissance
-              </span>{' '}
-              and{' '}
-              <span className="font-medium text-foreground">
-                HTTP security-header inspection
-              </span>{' '}
-              — built with Go, Wails, React &amp; TypeScript.
+              {t('hero.desc')}
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-2">
@@ -82,12 +84,12 @@ export function Hero() {
               <Button asChild size="lg" className="h-12 px-6">
                 <Link href="/download">
                   <Download className="mr-2 h-4 w-4" />
-                  Download for free
+                  {t('hero.downloadFree')}
                 </Link>
               </Button>
               <Button asChild size="lg" className="h-12 px-6">
                 <Link href="/features">
-                  Explore features
+                  {t('hero.exploreFeatures')}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -99,23 +101,28 @@ export function Hero() {
               >
                 <a href={PROJECT.repo} target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-4 w-4" />
-                  View on GitHub
+                  {t('hero.viewGithub')}
                 </a>
               </Button>
             </div>
 
             {/* stats */}
             <dl className="mt-10 grid w-full max-w-lg grid-cols-2 gap-px overflow-hidden rounded-xl border border-border/60 bg-border/60 sm:grid-cols-4">
-              {STATS.map((s) => (
-                <div key={s.label} className="bg-card/80 px-4 py-3">
-                  <dt className="text-[11px] uppercase tracking-wider text-muted-foreground">
-                    {s.label}
-                  </dt>
-                  <dd className="mt-0.5 text-lg font-semibold text-foreground">
-                    {s.value}
-                  </dd>
-                </div>
-              ))}
+              {STATS.map((s) => {
+                const labelKey = STAT_LABEL[s.label] ?? 'hero.platforms'
+                const value =
+                  s.value === 'Open Source' ? t('hero.openSource') : s.value
+                return (
+                  <div key={s.label} className="bg-card/80 px-4 py-3">
+                    <dt className="text-[11px] uppercase tracking-wider text-muted-foreground">
+                      {t(labelKey)}
+                    </dt>
+                    <dd className="mt-0.5 text-lg font-semibold text-foreground">
+                      {value}
+                    </dd>
+                  </div>
+                )
+              })}
             </dl>
           </motion.div>
 

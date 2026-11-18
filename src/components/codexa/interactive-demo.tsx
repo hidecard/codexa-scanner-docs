@@ -14,6 +14,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { SectionHeading } from './section-heading'
+import { useT } from '@/components/i18n/language-provider'
 
 type Phase = 'idle' | 'resolving' | 'pinned' | 'scanning' | 'done'
 
@@ -54,6 +55,7 @@ const STATUS_ICON = {
 } as const
 
 export function InteractiveDemo() {
+  const t = useT()
   const [phase, setPhase] = useState<Phase>('idle')
   const [revealed, setRevealed] = useState(0)
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
@@ -91,6 +93,12 @@ export function InteractiveDemo() {
     setRevealed(0)
   }
 
+  const statusLabel: Record<PortRow['status'], string> = {
+    open: t('demo.open'),
+    filtered: t('demo.filtered'),
+    closed: t('demo.closed'),
+  }
+
   const progress =
     phase === 'done' ? 100 : Math.round((revealed / PORTS.length) * 100)
 
@@ -111,13 +119,15 @@ export function InteractiveDemo() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Interactive demo"
+          eyebrow={t('demo.eyebrow')}
           title={
             <>
-              See a scan in <span className="text-primary">action</span>
+              {t('demo.title').split(t('demo.titleHighlight'))[0]}
+              <span className="text-primary">{t('demo.titleHighlight')}</span>
+              {t('demo.title').split(t('demo.titleHighlight'))[1]}
             </>
           }
-          description="A simulated run of the Port Scanner module — watch how DNS resolves, an address is pinned, and ports stream in live. This is a demo, not a real scan."
+          description={t('demo.desc')}
         />
 
         <div className="mx-auto mt-12 max-w-3xl">
@@ -162,13 +172,13 @@ export function InteractiveDemo() {
               <div className="flex min-h-[20px] items-center gap-2 font-mono text-[11px]">
                 {phase === 'idle' && (
                   <span className="text-muted-foreground">
-                    Ready to scan. Click “Run scan”.
+                    {t('demo.ready')}
                   </span>
                 )}
                 {phase === 'resolving' && (
                   <span className="flex items-center gap-1.5 text-muted-foreground">
                     <Loader2 className="h-3 w-3 animate-spin text-primary" />
-                    Resolving hostname…
+                    {t('demo.resolving')}
                   </span>
                 )}
                 {(phase === 'pinned' ||
@@ -186,7 +196,7 @@ export function InteractiveDemo() {
                           exit={{ opacity: 0 }}
                           className="text-primary"
                         >
-                          scanning… {revealed}/{PORTS.length}
+                          {t('demo.scanning')} {revealed}/{PORTS.length}
                         </motion.span>
                       )}
                       {phase === 'done' && (
@@ -196,7 +206,7 @@ export function InteractiveDemo() {
                           animate={{ opacity: 1 }}
                           className="text-emerald-400"
                         >
-                          scan complete
+                          {t('demo.scanComplete')}
                         </motion.span>
                       )}
                     </AnimatePresence>
@@ -218,9 +228,9 @@ export function InteractiveDemo() {
               {/* results table */}
               <div className="overflow-hidden rounded-md border border-border/50">
                 <div className="grid grid-cols-[60px_1fr_90px] gap-2 border-b border-border/50 bg-muted/30 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  <span>Port</span>
-                  <span>Service</span>
-                  <span className="text-right">Status</span>
+                  <span>{t('demo.port')}</span>
+                  <span>{t('demo.service')}</span>
+                  <span className="text-right">{t('demo.status')}</span>
                 </div>
                 <div className="min-h-[120px] divide-y divide-border/40">
                   {PORTS.slice(0, revealed).map((row) => {
@@ -242,7 +252,7 @@ export function InteractiveDemo() {
                             className={`inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-[10px] font-semibold ${STATUS_STYLE[row.status]}`}
                           >
                             <Icon className="h-2.5 w-2.5" />
-                            {row.status}
+                            {statusLabel[row.status]}
                           </span>
                         </span>
                       </motion.div>
@@ -250,7 +260,7 @@ export function InteractiveDemo() {
                   })}
                   {revealed === 0 && (
                     <div className="px-3 py-6 text-center font-mono text-[11px] text-muted-foreground">
-                      Awaiting scan…
+                      {t('demo.awaiting')}
                     </div>
                   )}
                 </div>
@@ -261,12 +271,12 @@ export function InteractiveDemo() {
                 <div className="flex flex-wrap gap-3 font-mono text-[11px] text-muted-foreground">
                   {phase !== 'idle' && (
                     <>
-                      <span className="text-emerald-400">{openCount} open</span>
+                      <span className="text-emerald-400">{openCount} {t('demo.open')}</span>
                       <span className="text-amber-400">
-                        {filteredCount} filtered
+                        {filteredCount} {t('demo.filtered')}
                       </span>
                       <span className="text-rose-400">
-                        {closedCount} closed
+                        {closedCount} {t('demo.closed')}
                       </span>
                     </>
                   )}
@@ -275,7 +285,7 @@ export function InteractiveDemo() {
                   {phase === 'done' ? (
                     <Button onClick={reset} variant="outline" size="sm">
                       <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
-                      Reset
+                      {t('demo.reset')}
                     </Button>
                   ) : (
                     <Button
@@ -284,7 +294,7 @@ export function InteractiveDemo() {
                       disabled={phase !== 'idle'}
                     >
                       <Play className="mr-1.5 h-3.5 w-3.5" />
-                      {phase === 'idle' ? 'Run scan' : 'Scanning…'}
+                      {phase === 'idle' ? t('demo.runScan') : t('demo.scanning')}
                     </Button>
                   )}
                 </div>
@@ -293,8 +303,7 @@ export function InteractiveDemo() {
           </div>
 
           <p className="mt-4 text-center text-xs text-muted-foreground">
-            Simulated output for demonstration only — no real network requests
-            are made. Actual scans require authorization.
+            {t('demo.disclaimer')}
           </p>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/components/i18n/language-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://github.com/hidecard/codexa-scanner"),
   title: "Codexa Scanner — Cross-Platform Network & Web Security Scanner",
   description:
     "Codexa Scanner is a cross-platform desktop app for network reconnaissance and HTTP security-header inspection. Built with Go, Wails, React and TypeScript. Available for Linux, Windows and macOS.",
@@ -65,8 +67,10 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          {children}
-          <Toaster />
+          <LanguageProvider>
+            {children}
+            <Toaster />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
