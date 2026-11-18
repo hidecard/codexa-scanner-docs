@@ -1,6 +1,7 @@
 import { Navbar } from '@/components/codexa/navbar'
 import { Hero } from '@/components/codexa/hero'
 import { Modules } from '@/components/codexa/modules'
+import { DocsBrowser } from '@/components/codexa/docs-browser'
 import { Platforms } from '@/components/codexa/platforms'
 import { HowItWorks } from '@/components/codexa/how-it-works'
 import { Downloads } from '@/components/codexa/downloads'
@@ -14,6 +15,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Modules />
+        <DocsBrowser />
         <Platforms />
         <HowItWorks />
         <Downloads />

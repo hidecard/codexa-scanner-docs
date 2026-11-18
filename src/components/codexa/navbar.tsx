@@ -9,6 +9,7 @@ import { PROJECT } from '@/lib/codexa-data'
 
 const NAV_LINKS = [
   { label: 'Features', href: '#features' },
+  { label: 'Docs', href: '#docs' },
   { label: 'Cross-Platform', href: '#platforms' },
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Download', href: '#download' },
