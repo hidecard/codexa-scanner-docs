@@ -1,5 +1,5 @@
 {
-  "name": "nextjs_tailwind_shadcn_ts",
+  "name": "codexa-scanner-docs",
   "version": "0.2.1",
   "private": true,
   "scripts": {
@@ -71,6 +71,8 @@
     "react-syntax-highlighter": "^15.6.1",
     "recharts": "^2.15.4",
     "sharp": "^0.34.3",
+    "socket.io": "^4.8.4",
+    "socket.io-client": "^4.8.4",
     "sonner": "^2.0.6",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
@@ -90,5 +92,24 @@
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.5",
     "typescript": "^5"
+  },
+  "description": "Documentation website for Codexa Scanner, a cross-platform network reconnaissance and web security scanner.",
+  "homepage": "https://github.com/hidecard/codexa-scanner-docs#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hidecard/codexa-scanner-docs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hidecard/codexa-scanner-docs/issues"
+  },
+  "keywords": [
+    "codexa-scanner",
+    "documentation",
+    "network-security",
+    "web-security",
+    "nextjs"
+  ],
+  "engines": {
+    "node": ">=20.9.0"
   }
 }

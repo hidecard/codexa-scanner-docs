@@ -16,10 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://github.com/hidecard/codexa-scanner"),
+  metadataBase: new URL("https://github.com/hidecard/codexa-scanner-docs"),
   alternates: {
     types: {
-      "application/rss+xml": "https://github.com/hidecard/codexa-scanner/feed.xml",
+      "application/rss+xml": "/feed.xml",
     },
   },
   title: "Codexa Scanner — Cross-Platform Network & Web Security Scanner",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "Codexa Scanner — Cross-Platform Security Scanner",
     description:
       "Desktop network reconnaissance and HTTP security-header inspection for Linux, Windows and macOS.",
-    url: "https://github.com/hidecard/codexa-scanner",
+    url: "https://github.com/hidecard/codexa-scanner-docs",
     siteName: "Codexa Scanner",
     type: "website",
   },
