@@ -20,10 +20,10 @@ Documentation site for [Codexa Scanner](https://github.com/hidecard/codexa-scann
 ## Run locally
 
 ```bash
- git clone https://github.com/hidecard/codexa-scanner-docs.git
- cd codexa-scanner-docs
- bun install --frozen-lockfile
- bun run dev
+git clone https://github.com/hidecard/codexa-scanner-docs.git
+cd codexa-scanner-docs
+bun install --frozen-lockfile
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000). Useful commands:
