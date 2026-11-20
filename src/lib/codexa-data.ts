@@ -19,12 +19,12 @@ import type { LocalString } from '@/lib/i18n/local-string'
 
 export const PROJECT = {
   name: 'Codexa Scanner',
-  version: 'v1.1.5',
+  version: 'v1.1.6',
   author: 'H!D3-C4rD',
   repo: 'https://github.com/hidecard/codexa-scanner',
   releases: 'https://github.com/hidecard/codexa-scanner/releases',
   docs: 'https://github.com/hidecard/codexa-scanner/tree/main/docs',
-  downloadBase: 'https://github.com/hidecard/codexa-scanner/releases/download/v1.1.5',
+  downloadBase: 'https://github.com/hidecard/codexa-scanner/releases/download/v1.1.6',
   description: {
     en: 'A desktop application for network reconnaissance and HTTP security-header inspection built with Go, Wails v2, React and TypeScript. Designed for authorized testing, education and defensive security work.',
     my: 'ကွန်ရက်စူးစမ်းမှုနဲ့ HTTP လုံခြုံရေးဟက်ဒါ စစ်ဆေးခြင်းအတွက် Go, Wails v2, React နဲ့ TypeScript နဲ့တည်ဆောက်ထားတဲ့ ဒက်စတော့ပ် application တစ်ခု။ ခွင့်ပြုထားတဲ့ စမ်းသပ်မှု၊ ပညာရေးနဲ့ ကာကွယ်ရေး လုံခြုံမှုလုပ်ငန်းတွေအတွက် ရည်ရွယ်ထား။',
@@ -52,15 +52,15 @@ export const PLATFORMS: Platform[] = [
     name: 'Linux',
     os: 'Linux',
     arch: 'amd64',
-    file: 'CodexaScanner_1.1.5_amd64.deb',
-    url: `${PROJECT.downloadBase}/CodexaScanner_1.1.5_amd64.deb`,
+    file: 'CodexaScanner_1.1.6_amd64.deb',
+    url: `${PROJECT.downloadBase}/CodexaScanner_1.1.6_amd64.deb`,
     size: { en: '.deb package', my: '.deb ပက်ကေ့ဂျ်' },
     format: 'DEB',
     icon: Terminal,
     accent: 'amber',
     install: [
       { en: 'Download the .deb package', my: '.deb ပက်ကေ့ဂျ်ကို ဒေါင်းလုဒ်လုပ်ပါ' },
-      { en: 'Install via: sudo dpkg -i CodexaScanner_1.1.5_amd64.deb', my: 'sudo dpkg -i CodexaScanner_1.1.5_amd64.deb နဲ့ install လုပ်ပါ' },
+      { en: 'Install via: sudo dpkg -i CodexaScanner_1.1.6_amd64.deb', my: 'sudo dpkg -i CodexaScanner_1.1.6_amd64.deb နဲ့ install လုပ်ပါ' },
       { en: 'Install GTK/WebKit runtime deps if missing', my: 'GTK/WebKit runtime dependencies မရှိရင် ထည့်ပေးပါ' },
       { en: 'Launch CodexaScanner from your app menu', my: 'App menu ကနေ CodexaScanner ကိုဖွင့်ပါ' },
     ],
@@ -546,6 +546,6 @@ export const QUICK_STEPS: { step: string; title: LocalString; body: LocalString 
 export const STATS: { label: LocalString; value: LocalString }[] = [
   { label: { en: 'Platforms', my: 'ပလက်ဖောင်းများ' }, value: { en: '4', my: '4' } },
   { label: { en: 'Modules', my: 'မော်ဂျူးများ' }, value: { en: '10', my: '10' } },
-  { label: { en: 'Version', my: 'ဗားရှင်း' }, value: { en: 'v1.1.5', my: 'v1.1.5' } },
+  { label: { en: 'Version', my: 'ဗားရှင်း' }, value: { en: 'v1.1.6', my: 'v1.1.6' } },
   { label: { en: 'License', my: 'လိုင်စင်' }, value: { en: 'Open Source', my: 'အခမဲ့' } },
 ]

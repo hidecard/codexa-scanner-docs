@@ -21,8 +21,8 @@ export type Release = {
 // the feature set documented in the README, mapped to each tag.
 export const RELEASES: Release[] = [
   {
-    version: 'v1.1.5',
-    tag: 'v1.1.5',
+    version: 'v1.1.6',
+    tag: 'v1.1.6',
     date: '2026-11-20T02:00:00Z',
     latest: true,
     summary: {
@@ -41,9 +41,9 @@ export const RELEASES: Release[] = [
       { name: 'CodexaScanner-amd64.dmg', size: 'release asset' },
       { name: 'CodexaScanner-arm64.dmg', size: 'release asset' },
       { name: 'CodexaScanner.exe', size: 'release asset' },
-      { name: 'CodexaScanner_1.1.5_amd64.deb', size: 'release asset' },
+      { name: 'CodexaScanner_1.1.6_amd64.deb', size: 'release asset' },
     ],
-    compareUrl: 'https://github.com/hidecard/codexa-scanner/compare/v1.1.4...v1.1.5',
+    compareUrl: 'https://github.com/hidecard/codexa-scanner/compare/v1.1.4...v1.1.6',
   },
   {
     version: 'v1.1.4',
