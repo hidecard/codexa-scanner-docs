@@ -12,17 +12,19 @@ import {
   Cpu,
   Code2,
   Layers,
+  Radio,
+  BriefcaseBusiness,
 } from 'lucide-react'
 import type { LocalString } from '@/lib/i18n/local-string'
 
 export const PROJECT = {
   name: 'Codexa Scanner',
-  version: 'v1.1.4',
+  version: 'v1.1.5',
   author: 'H!D3-C4rD',
   repo: 'https://github.com/hidecard/codexa-scanner',
   releases: 'https://github.com/hidecard/codexa-scanner/releases',
   docs: 'https://github.com/hidecard/codexa-scanner/tree/main/docs',
-  downloadBase: 'https://github.com/hidecard/codexa-scanner/releases/download/v1.1.4',
+  downloadBase: 'https://github.com/hidecard/codexa-scanner/releases/download/v1.1.5',
   description: {
     en: 'A desktop application for network reconnaissance and HTTP security-header inspection built with Go, Wails v2, React and TypeScript. Designed for authorized testing, education and defensive security work.',
     my: 'ကွန်ရက်စူးစမ်းမှုနဲ့ HTTP လုံခြုံရေးဟက်ဒါ စစ်ဆေးခြင်းအတွက် Go, Wails v2, React နဲ့ TypeScript နဲ့တည်ဆောက်ထားတဲ့ ဒက်စတော့ပ် application တစ်ခု။ ခွင့်ပြုထားတဲ့ စမ်းသပ်မှု၊ ပညာရေးနဲ့ ကာကွယ်ရေး လုံခြုံမှုလုပ်ငန်းတွေအတွက် ရည်ရွယ်ထား။',
@@ -50,15 +52,15 @@ export const PLATFORMS: Platform[] = [
     name: 'Linux',
     os: 'Linux',
     arch: 'amd64',
-    file: 'CodexaScanner_1.1.4_amd64.deb',
-    url: `${PROJECT.downloadBase}/CodexaScanner_1.1.4_amd64.deb`,
+    file: 'CodexaScanner_1.1.5_amd64.deb',
+    url: `${PROJECT.downloadBase}/CodexaScanner_1.1.5_amd64.deb`,
     size: { en: '.deb package', my: '.deb ပက်ကေ့ဂျ်' },
     format: 'DEB',
     icon: Terminal,
     accent: 'amber',
     install: [
       { en: 'Download the .deb package', my: '.deb ပက်ကေ့ဂျ်ကို ဒေါင်းလုဒ်လုပ်ပါ' },
-      { en: 'Install via: sudo dpkg -i CodexaScanner_1.1.4_amd64.deb', my: 'sudo dpkg -i CodexaScanner_1.1.4_amd64.deb နဲ့ install လုပ်ပါ' },
+      { en: 'Install via: sudo dpkg -i CodexaScanner_1.1.5_amd64.deb', my: 'sudo dpkg -i CodexaScanner_1.1.5_amd64.deb နဲ့ install လုပ်ပါ' },
       { en: 'Install GTK/WebKit runtime deps if missing', my: 'GTK/WebKit runtime dependencies မရှိရင် ထည့်ပေးပါ' },
       { en: 'Launch CodexaScanner from your app menu', my: 'App menu ကနေ CodexaScanner ကိုဖွင့်ပါ' },
     ],
@@ -438,6 +440,59 @@ export const MODULES: Module[] = [
       my: 'Database ကို app က upload မလုပ်ပါ၊ encrypt မလုပ်ပါ။ Unix-style system တွေမှာ current user သာ ဝင်ရောက်နိုင်တယ်။',
     },
   },
+
+  {
+    id: 'threat-feed',
+    name: 'Latest Threat & CVE Feed',
+    icon: Radio,
+    short: { en: 'Opt-in CISA KEV and NVD updates with offline cache', my: 'Opt-in CISA KEV နဲ့ NVD update + offline cache' },
+    description: { en: 'Manually syncs official CISA KEV and recent Critical/High NVD entries without an API key, stores them in a local SQLite cache, and feeds matching advisories into passive version checks.', my: 'API key မလိုဘဲ CISA KEV နဲ့ Critical/High NVD entry အသစ်တွေကို ကိုယ်တိုင် sync လုပ်၊ local SQLite cache မှာသိမ်းပြီး passive version check ထဲမှာ advisory match လုပ်ပေးတယ်။' },
+    bullets: [
+      { en: 'Manual or opt-in sync only; no startup request', my: 'Manual ဒါမမဟုတ် opt-in sync သာ; startup request မပို့' },
+      { en: '15-second per-source timeout with bundled/cache fallback', my: 'Source တစ်ခုချင်း 15-second timeout + bundled/cache fallback' },
+      { en: '7-day and 30-day Critical/High views with KEV badges', my: '7-day နဲ့ 30-day Critical/High view + KEV badge' },
+      { en: 'Scanned-asset technology matching and dynamic advisory updates', my: 'Scan လုပ်ထားတဲ့ asset technology matching + dynamic advisory update' },
+    ],
+    usage: [
+      { en: 'Open Dashboard and choose Sync Latest CVEs.', my: 'Dashboard ဖွင့်ပြီး Sync Latest CVEs ကိုရွေးပါ။' },
+      { en: 'Choose the 7-day or 30-day view and review source/severity badges.', my: '7-day ဒါမမဟုတ် 30-day view ရွေးပြီး source/severity badge တွေကြည့်ပါ။' },
+      { en: 'Review Affects Your Scanned Assets matches as prioritization clues, not exploit proof.', my: 'Affects Your Scanned Assets match ကို ဦးစားပေး clue အဖြစ်သာကြည့်ပါ၊ exploit သက်သေမဟုတ်ပါ။' },
+      { en: 'If the network is unavailable, continue using the local cache and bundled advisory data.', my: 'Network မရရင် local cache နဲ့ bundled advisory data ကိုဆက်သုံးပါ။' },
+    ],
+    checks: [
+      { en: 'CISA Known Exploited Vulnerabilities JSON feed', my: 'CISA Known Exploited Vulnerabilities JSON feed' },
+      { en: 'NVD API 2.0 recent CVEs without an API key', my: 'API key မလိုတဲ့ NVD API 2.0 recent CVE' },
+      { en: 'Local SQLite cve_feed persistence', my: 'Local SQLite cve_feed သိမ်းဆည်းမှု' },
+      { en: 'Technology/product matching against scanned assets', my: 'Scan လုပ်ထားတဲ့ asset တွေနဲ့ technology/product matching' },
+    ],
+    notes: { en: 'Sync is deliberately manual and local-first. Remote feeds are advisory intelligence and do not replace verification of affected versions.', my: 'Sync ကို တမင် manual + local-first ထားတယ်။ Remote feed က advisory intelligence သာဖြစ်ပြီး affected version အတည်ပြုမှုကို မအစားထိုးပါ။' },
+  },
+  {
+    id: 'engagement-workflows',
+    name: 'Engagement Workflows',
+    icon: BriefcaseBusiness,
+    short: { en: 'Workspaces, imports, Inspector, replay and analyst triage', my: 'Workspace၊ import၊ Inspector၊ replay + analyst triage' },
+    description: { en: 'Organize authorized work in local workspaces, import Nmap XML or subdomain lists, inspect bounded HTTP traffic, replay safe requests, and annotate findings.', my: 'ခွင့်ပြုထားတဲ့အလုပ်တွေကို local workspace နဲ့စီမံ၊ Nmap XML ဒါမဟုတ် subdomain list import၊ bounded HTTP traffic inspect၊ safe request replay နဲ့ finding annotation လုပ်ပါ။' },
+    bullets: [
+      { en: 'Project/engagement workspaces backed by SQLite', my: 'SQLite အခြေခံ project/engagement workspace' },
+      { en: 'Nmap XML and newline-delimited subdomain imports', my: 'Nmap XML နဲ့ newline ခွဲ subdomain import' },
+      { en: 'Raw HTTP Inspector with GET/HEAD/OPTIONS bounded replay', my: 'GET/HEAD/OPTIONS bounded replay ပါ Raw HTTP Inspector' },
+      { en: 'Finding tags, notes, bilingual Security Playbook and Ctrl/Cmd+K palette', my: 'Finding tag၊ note၊ bilingual Security Playbook + Ctrl/Cmd+K palette' },
+    ],
+    usage: [
+      { en: 'Create or select a workspace before importing or reviewing history.', my: 'Import ဒါမဟုတ် history review မလုပ်ခင် workspace ဖန်တီး ဒါမဟုတ်ရွေးပါ။' },
+      { en: 'Import Nmap -oX XML or newline-delimited subdomains; invalid entries are reported and duplicates removed.', my: 'Nmap -oX XML ဒါမဟုတ် newline ခွဲ subdomain import လုပ်ပါ; မမှန် entry တွေဖော်ပြပြီး duplicate ဖယ်ရှားတယ်။' },
+      { en: 'Use Inspector only for approved targets and safe methods; replay stays in the same host/port scope.', my: 'ခွင့်ပြုထားတဲ့ target နဲ့ safe method သာ Inspector မှာသုံးပါ; replay က host/port scope တူထဲမှာပဲနေတယ်။' },
+      { en: 'Tag findings and open the Playbook for remediation and verification guidance.', my: 'Finding တွေကို tag လုပ်ပြီး remediation + verification လမ်းညွှန်အတွက် Playbook ဖွင့်ပါ။' },
+    ],
+    checks: [
+      { en: 'Workspace assignment without deleting scan history', my: 'Scan history မဖျက်ဘဲ workspace assignment' },
+      { en: 'Safe import validation, deduplication and target caps', my: 'Safe import validation၊ deduplication + target cap' },
+      { en: 'Header/body preview, TLS and protocol details in Inspector', my: 'Inspector ထဲ header/body preview၊ TLS + protocol detail' },
+      { en: 'Verified / False Positive / Needs Review / Accepted Risk tags', my: 'Verified / False Positive / Needs Review / Accepted Risk tag တွေ' },
+    ],
+    notes: { en: 'Import and replay never execute external commands. Review and redact evidence before sharing reports.', my: 'Import နဲ့ replay က external command မ run ပါ။ Report မျှဝေခင် evidence ကို review + redact လုပ်ပါ။' },
+  },
 ]
 
 export type Tech = {
@@ -474,7 +529,7 @@ export const QUICK_STEPS: { step: string; title: LocalString; body: LocalString 
     step: '03',
     title: { en: 'Pick a module', my: 'Module ရွေးပါ' },
     body: {
-      en: 'Choose from Port Scanner, Web Audit, Subdomain Discovery, Path Fuzzer, TLS Inspector, DNS Intelligence or IP Information.',
+      en: 'Choose from Port Scanner, Web Audit, Subdomain Discovery, Path Fuzzer, TLS Inspector, DNS Intelligence, IP Information, Threat Feed or Engagement Workflows.',
       my: 'Port Scanner၊ Web Audit၊ Subdomain Discovery၊ Path Fuzzer၊ TLS Inspector၊ DNS Intelligence ဒါမမဟုတ် IP Information ကနေရွေးပါ။',
     },
   },
@@ -490,7 +545,7 @@ export const QUICK_STEPS: { step: string; title: LocalString; body: LocalString 
 
 export const STATS: { label: LocalString; value: LocalString }[] = [
   { label: { en: 'Platforms', my: 'ပလက်ဖောင်းများ' }, value: { en: '4', my: '4' } },
-  { label: { en: 'Modules', my: 'မော်ဂျူးများ' }, value: { en: '8', my: '8' } },
-  { label: { en: 'Version', my: 'ဗားရှင်း' }, value: { en: 'v1.1.4', my: 'v1.1.4' } },
+  { label: { en: 'Modules', my: 'မော်ဂျူးများ' }, value: { en: '10', my: '10' } },
+  { label: { en: 'Version', my: 'ဗားရှင်း' }, value: { en: 'v1.1.5', my: 'v1.1.5' } },
   { label: { en: 'License', my: 'လိုင်စင်' }, value: { en: 'Open Source', my: 'အခမဲ့' } },
 ]

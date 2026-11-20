@@ -21,6 +21,31 @@ export type Release = {
 // the feature set documented in the README, mapped to each tag.
 export const RELEASES: Release[] = [
   {
+    version: 'v1.1.5',
+    tag: 'v1.1.5',
+    date: '2026-11-20T02:00:00Z',
+    latest: true,
+    summary: {
+      en: 'Latest Threat & CVE Feed, engagement workflows, and CI/release reliability updates.',
+      my: 'Latest Threat & CVE Feed၊ engagement workflow နဲ့ CI/release ယုံကြည်ရမှု update တွေ။',
+    },
+    highlights: [
+      { en: 'Opt-in CISA KEV and NVD 2.0 sync without an API key', my: 'API key မလိုတဲ့ opt-in CISA KEV + NVD 2.0 sync' },
+      { en: 'Local SQLite CVE cache with 15-second source timeouts and offline bundled-advisory fallback', my: '15-second source timeout နဲ့ offline bundled-advisory fallback ပါ local SQLite CVE cache' },
+      { en: 'Dashboard 7/30-day Critical/High feed, KEV badges and scanned-asset technology matching', my: 'Dashboard 7/30-day Critical/High feed၊ KEV badge + scanned-asset technology matching' },
+      { en: 'Workspaces, Nmap XML/subdomain imports, HTTP Inspector and bounded safe replay', my: 'Workspace၊ Nmap XML/subdomain import၊ HTTP Inspector + bounded safe replay' },
+      { en: 'Analyst finding tags/notes, command palette and bilingual Security Playbook', my: 'Analyst finding tag/note၊ command palette + bilingual Security Playbook' },
+      { en: 'CI portability fix for missing custom-rules files and verified release packaging', my: 'Custom-rules file မရှိတဲ့အခါ CI portability fix + release packaging verification' },
+    ],
+    assets: [
+      { name: 'CodexaScanner-amd64.dmg', size: 'release asset' },
+      { name: 'CodexaScanner-arm64.dmg', size: 'release asset' },
+      { name: 'CodexaScanner.exe', size: 'release asset' },
+      { name: 'CodexaScanner_1.1.5_amd64.deb', size: 'release asset' },
+    ],
+    compareUrl: 'https://github.com/hidecard/codexa-scanner/compare/v1.1.4...v1.1.5',
+  },
+  {
     version: 'v1.1.4',
     tag: 'v1.1.4',
     date: '2026-11-18T01:28:30Z',

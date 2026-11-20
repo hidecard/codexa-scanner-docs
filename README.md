@@ -7,7 +7,7 @@ Documentation site for [Codexa Scanner](https://github.com/hidecard/codexa-scann
 ## What’s in this repository?
 
 - **Guides:** step-by-step documentation for the scanner’s modules
-- **Features:** Port Scanner, Web Audit, Subdomain Discovery, Path Fuzzer, TLS Inspector, DNS Intelligence, IP Information, and History & Reports
+- **Features:** Port Scanner, Web Audit, Subdomain Discovery, Path Fuzzer, TLS Inspector, DNS Intelligence, IP Information, History & Reports, Latest Threat & CVE Feed, Workspaces, External-tool Import, HTTP Inspector & bounded Replay, Analyst Triage, and Security Playbook
 - **Downloads:** release installation instructions for Linux, Windows, and macOS
 - **Reference:** glossary, changelog, and roadmap
 - **Site:** a Next.js application built with React, TypeScript, Tailwind CSS, and shadcn/ui components
@@ -32,6 +32,8 @@ Open [http://localhost:3000](http://localhost:3000). Useful commands:
 bun run lint
 bun run build
 ```
+
+The production build explicitly uses Next.js Webpack mode (`next build --webpack`) because the hosted Turbopack path can fail while spawning the Tailwind/PostCSS worker for `globals.css`.
 
 The production build prepares a standalone Next.js output. Use the repository’s deployment configuration when running the generated server; the `start` script expects Bun.
 

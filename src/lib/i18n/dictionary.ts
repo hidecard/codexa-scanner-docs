@@ -68,7 +68,7 @@ export const DICTIONARY = {
     'search.trigger': 'Search docs…',
 
     'docschrome.title': 'Documentation',
-    'docschrome.versionNote': 'v1.1.4 · {n} articles',
+    'docschrome.versionNote': 'v1.1.5 · {n} articles',
     'docschrome.modules': 'Modules',
 
     'cta.heading': 'Ready to run your first scan?',
@@ -199,7 +199,7 @@ export const DICTIONARY = {
     'search.trigger': 'စာရွက်စာတမ်း ရှာဖွေ…',
 
     'docschrome.title': 'စာရွက်စာတမ်း',
-    'docschrome.versionNote': 'v1.1.4 · ဆောင်းပါး {n} ပုဒ်',
+    'docschrome.versionNote': 'v1.1.5 · ဆောင်းပါး {n} ပုဒ်',
     'docschrome.modules': 'မော်ဂျူးများ',
 
     'cta.heading': 'ပထမဆုံး scan လုပ်ဖို့ အဆင်သင့်ဖြစ်ပြီလား?',

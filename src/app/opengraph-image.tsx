@@ -93,7 +93,7 @@ export default function OpengraphImage() {
                 fontWeight: 600,
               }}
             >
-              v1.1.4
+              v1.1.5
             </span>
           </div>
         </div>

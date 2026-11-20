@@ -147,7 +147,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
           {
             kind: 'list',
             items: [
-              { en: 'Linux — CodexaScanner_1.1.4_amd64.deb', my: 'Linux — CodexaScanner_1.1.4_amd64.deb' },
+              { en: 'Linux — CodexaScanner_1.1.5_amd64.deb', my: 'Linux — CodexaScanner_1.1.5_amd64.deb' },
               { en: 'Windows — CodexaScanner.exe (portable)', my: 'Windows — CodexaScanner.exe (portable)' },
               { en: 'macOS Apple Silicon — CodexaScanner-arm64.dmg', my: 'macOS Apple Silicon — CodexaScanner-arm64.dmg' },
               { en: 'macOS Intel — CodexaScanner-amd64.dmg', my: 'macOS Intel — CodexaScanner-amd64.dmg' },
@@ -162,7 +162,7 @@ export const GUIDE_ARTICLES: GuideArticle[] = [
           {
             kind: 'list',
             items: [
-              { en: 'Linux: sudo dpkg -i CodexaScanner_1.1.4_amd64.deb (install GTK/WebKit runtime deps if missing).', my: 'Linux: sudo dpkg -i CodexaScanner_1.1.4_amd64.deb (GTK/WebKit runtime deps မရှိရင် ထည့်ပါ)။' },
+              { en: 'Linux: sudo dpkg -i CodexaScanner_1.1.5_amd64.deb (install GTK/WebKit runtime deps if missing).', my: 'Linux: sudo dpkg -i CodexaScanner_1.1.5_amd64.deb (GTK/WebKit runtime deps မရှိရင် ထည့်ပါ)။' },
               { en: 'Windows: run CodexaScanner.exe directly — WebView2 runtime is required (preinstalled on Windows 11).', my: 'Windows: CodexaScanner.exe ကိုတိုက်ရိုက် run — WebView2 runtime လို (Windows 11 မှာ ပုံသေပါ)။' },
               { en: 'macOS: open the DMG, drag CodexaScanner.app to Applications, then right-click → Open the first time (Gatekeeper, unsigned build).', my: 'macOS: DMG ဖွင့်ပြီး CodexaScanner.app ကို Applications သို့ဆွဲ၊ ပထမဆုံး right-click → Open (Gatekeeper၊ unsigned build)။' },
             ],

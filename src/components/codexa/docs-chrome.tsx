@@ -26,7 +26,7 @@ export function DocsChrome({ children }: { children: React.ReactNode }) {
             <BookOpen className="h-4 w-4 text-primary" />
             <span className="font-semibold">{t('docschrome.title')}</span>
             <span className="hidden text-muted-foreground sm:inline">
-              · Codexa Scanner v1.1.4
+              · Codexa Scanner v1.1.5
             </span>
           </div>
 
